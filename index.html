@@ -385,7 +385,7 @@ body::before{
 .scope-chip.user{background:rgba(var(--c-line),.06);border-color:var(--line-2);color:var(--text-2)}
 .scope-chip.user .role-dot{background:var(--text-3);box-shadow:none}
 
-.sidebar-nav{flex:1;overflow-y:auto;padding:14px 12px}
+.sidebar-nav{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 12px}
 .nav-section{margin-bottom:18px}
 .nav-label{padding:6px 10px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--text-4);font-weight:600}
 .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--text-2);cursor:pointer;font-size:13px;font-weight:500;transition:background var(--dur) var(--ease),color var(--dur) var(--ease);position:relative;margin-bottom:2px}
@@ -431,8 +431,8 @@ body::before{
 .session-chip .sdot{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:pulseDot 2.4s infinite}
 
 /* ── content ── */
-.content{padding:36px 40px 48px;max-width:1400px;width:100%;margin:0 auto}
-.page-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.content{padding:36px 40px 48px;max-width:none;width:100%;margin:0}
+.page-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
 .page-hero .titles{max-width:640px}
 .kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(var(--c-accent),.08);border:1px solid rgba(var(--c-accent),.18);border-radius:999px;font-size:11px;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
 .kicker svg{width:12px;height:12px}
@@ -463,7 +463,7 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 /* ═══════════════════════════════════════════════════
    MODULES
    ═══════════════════════════════════════════════════ */
-.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px}
 .module-card{position:relative;padding:22px;background:linear-gradient(180deg,rgba(var(--c-surface),.65),rgba(var(--c-ink850),.4));border:1px solid var(--line);border-radius:var(--r-md);cursor:pointer;transition:var(--dur) var(--ease);overflow:hidden;min-height:172px;display:flex;flex-direction:column}
 .module-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(var(--c-accent),.10),transparent 55%);opacity:0;transition:opacity var(--dur) var(--ease);pointer-events:none}
 .module-card::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
@@ -489,7 +489,7 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 /* ═══════════════════════════════════════════════════
    REPORTS
    ═══════════════════════════════════════════════════ */
-.reports-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.reports-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px}
 .rep-card{position:relative;padding:24px;background:linear-gradient(180deg,rgba(var(--c-surface),.65),rgba(var(--c-ink850),.4));border:1px solid var(--line);border-radius:var(--r-md);transition:var(--dur) var(--ease);overflow:hidden;min-height:200px;display:flex;flex-direction:column}
 .rep-card.access{cursor:pointer}
 .rep-card.access:hover{border-color:var(--steel-400);transform:translateY(-2px);box-shadow:var(--sh-2)}
@@ -595,14 +595,21 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 .sidebar{transition:width .48s cubic-bezier(.16,1,.3,1);overflow:hidden}
 @media(min-width:1025px){
 .sidebar.collapsed{width:var(--sidebar-w-collapsed)}
-.sidebar.collapsed .sidebar-head{padding:22px 0;justify-content:center}
-.sidebar.collapsed .sidebar-brand,.sidebar.collapsed .nav-text,.sidebar.collapsed .scope-chip span:last-child,.sidebar.collapsed .pcinfo{display:none}
-.sidebar.collapsed .sidebar-scope{padding:14px 12px 4px}
-.sidebar.collapsed .scope-chip{justify-content:center;padding:8px}
-.sidebar.collapsed .nav-label{font-size:0;padding:0;height:1px;background:var(--line);margin:6px 8px 12px}
-.sidebar.collapsed .nav-item{padding:10px 12px}
-.sidebar.collapsed .nav-item .nav-badge{display:none}
-.sidebar.collapsed .profile-card{flex-direction:column;padding:10px 4px;gap:8px}
+/* Layout idêntico nos dois estados: só largura e opacidade mudam → nada se desloca durante a animação */
+.sidebar-head{padding:22px 14px 20px 19px;gap:12px}
+.sidebar-brand{min-width:0;white-space:nowrap;transition:opacity .28s var(--ease) .12s}
+.sidebar-brand strong,.sidebar-brand span{white-space:nowrap}
+.sidebar-scope{padding:14px 12px 4px}
+.scope-chip{padding:8px 12px 8px 21px;overflow:hidden;white-space:nowrap}
+.scope-chip span:last-child{transition:opacity .28s var(--ease) .12s;white-space:nowrap}
+.nav-text{white-space:nowrap;transition:opacity .28s var(--ease) .12s}
+.nav-label{height:30px;box-sizing:border-box;display:flex;align-items:flex-end;white-space:nowrap;overflow:hidden;position:relative;transition:color .2s var(--ease)}
+.nav-label::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:1px;background:var(--line);opacity:0;transition:opacity .25s var(--ease)}
+.nav-item .nav-badge{transition:opacity .25s var(--ease) .12s}
+.sidebar.collapsed .sidebar-brand,.sidebar.collapsed .nav-text,.sidebar.collapsed .scope-chip span:last-child,.sidebar.collapsed .nav-item .nav-badge{opacity:0;transition-delay:0s;pointer-events:none}
+.sidebar.collapsed .nav-label{color:transparent}
+.sidebar.collapsed .nav-label::after{opacity:1}
+.sidebar.collapsed .sidebar-pin{opacity:0;pointer-events:none}
 }
 .nav-item{white-space:nowrap}
 .view{animation:fadeIn .25s ease}
@@ -617,7 +624,7 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 #dash-pbi iframe{width:100%;height:100%;border:none;display:block}
 .rep-mod{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--accent);margin:2px 0 8px;font-weight:500}
 .err-block a{color:inherit;text-decoration:underline;font-weight:600}
-/* ── Dashboard de Indicadores ── */
+/* ── Indicadores de Uso ── */
 .an-period{display:flex;gap:6px;background:rgba(var(--c-ink900),.55);border:1px solid var(--line);border-radius:999px;padding:4px;flex-shrink:0}
 .an-period-btn{border:none;background:none;color:var(--text-3);font-size:12px;font-weight:500;padding:7px 15px;border-radius:999px;cursor:pointer;transition:var(--dur) var(--ease);white-space:nowrap}
 .an-period-btn:hover{color:var(--text)}
@@ -655,21 +662,58 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 .greet-ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(78,111,149,.14);border:1px solid var(--line-2);flex:none}
 .greet h2{font-size:24px;font-weight:600;color:var(--text);letter-spacing:-.01em;line-height:1.2}
 .greet p{font-size:13px;color:var(--text-3);margin-top:2px}
-.nav-group .nav-sub{display:none;margin:2px 0 4px 18px;padding-left:8px;border-left:1px solid var(--line)}
-.nav-group.open .nav-sub{display:block}
+.nav-group .nav-sub{display:grid;grid-template-rows:0fr;margin:0 0 0 18px;padding-left:8px;border-left:1px solid var(--line);transition:grid-template-rows .35s var(--ease)}
+.nav-group.open .nav-sub{grid-template-rows:1fr}
+.nav-sub-in{overflow:hidden;min-height:0}
 .nav-group-head .chev{margin-left:auto;transition:transform var(--dur) var(--ease);flex:none}
 .nav-group.open .chev{transform:rotate(90deg)}
 .nav-group-head.has-active{color:var(--text)}
 .nav-item.sub{font-size:12.5px}
-@media(min-width:1025px){.sidebar.collapsed .nav-group .nav-sub{display:none!important}.sidebar.collapsed .chev{display:none}
+@media(min-width:1025px){.sidebar.collapsed .nav-group .nav-sub{grid-template-rows:0fr!important}.sidebar.collapsed .chev{opacity:0}
 .sidebar-toggle.active{background:rgba(78,111,149,.24);color:var(--accent);border-color:var(--line-3)}
 .mobile-only{display:none}
-.sidebar.collapsed .sidebar-pin{display:none}
 }
 .sidebar-head{position:relative}
 .sidebar-pin{margin-left:auto;flex-shrink:0;width:26px;height:26px;display:grid;place-items:center;background:none;border:none;color:var(--text-3);cursor:pointer;border-radius:7px;transition:var(--dur) var(--ease)}
 .sidebar-pin:hover{color:var(--text)}
-.sidebar-pin.active{color:var(--accent)}
+
+/* ── usuário no topo direito ── */
+.btn-logout{color:var(--text-2)}
+.btn-logout:hover{background:var(--danger-bg);border-color:var(--danger-line);color:var(--danger-t1)}
+.user-menu{position:relative}
+.user-chip{display:flex;align-items:center;gap:10px;padding:4px 10px 4px 4px;background:rgba(var(--c-surface),.5);border:1px solid var(--line-2);border-radius:999px;color:var(--text);cursor:pointer;font-family:inherit;transition:var(--dur) var(--ease)}
+.user-chip:hover,.user-menu.open .user-chip{border-color:var(--line-3);background:rgba(var(--c-surface),.8)}
+.uc-ava{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,var(--steel-500),var(--accent-2));font:700 12px 'Bricolage Grotesque',serif;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.uc-ava img,.pf-ava img{width:100%;height:100%;object-fit:cover;display:block}
+.uc-info{display:flex;flex-direction:column;align-items:flex-start;min-width:0;max-width:170px;line-height:1.2}
+.uc-info b{font:600 12.5px 'Bricolage Grotesque',serif;letter-spacing:-.01em;color:var(--text);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uc-info small{font-size:10.5px;color:var(--text-3);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uc-chev{color:var(--text-3);transition:transform var(--dur) var(--ease)}
+.user-menu.open .uc-chev{transform:rotate(180deg)}
+.user-dd{position:absolute;top:calc(100% + 10px);right:0;min-width:190px;padding:6px;background:rgba(var(--c-ink850),.98);backdrop-filter:blur(16px);border:1px solid var(--line-2);border-radius:14px;box-shadow:var(--sh-3);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility 0s linear .2s;z-index:80}
+.user-menu.open .user-dd{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.user-dd button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;background:none;border:none;border-radius:9px;color:var(--text-2);font:500 13px 'Geist',sans-serif;cursor:pointer;text-align:left;transition:var(--dur) var(--ease)}
+.user-dd button:hover{background:rgba(78,111,149,.12);color:var(--text)}
+.user-dd button.danger:hover{background:var(--danger-bg);color:var(--danger-t1)}
+@media(max-width:700px){.uc-info{display:none}.user-chip{padding:3px}.session-chip{display:none}}
+/* foto do perfil */
+.pf-photo{display:flex;align-items:center;gap:20px;padding:20px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pf-ava{width:84px;height:84px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,var(--steel-500),var(--accent-2));font:700 26px 'Bricolage Grotesque',serif;color:#fff;box-shadow:0 0 0 4px rgba(var(--c-accent),.14),0 10px 24px -8px rgba(78,111,149,.5)}
+.pf-photo > div:last-child{flex:1 1 240px;min-width:0}
+.pf-photo h4{font:600 15px 'Bricolage Grotesque',serif;color:var(--text)}
+.pf-photo p{font-size:12px;color:var(--text-3);margin-top:3px;line-height:1.5}
+.pf-photo .pf-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.pf-btn{padding:8px 14px;border-radius:9px;border:1px solid var(--line-2);background:rgba(var(--c-surface),.5);color:var(--text-2);font:500 12.5px 'Geist',sans-serif;cursor:pointer;transition:var(--dur) var(--ease)}
+.pf-btn:hover{border-color:var(--steel-400);color:var(--text);background:rgba(78,111,149,.10)}
+.pf-btn.primary{background:linear-gradient(135deg,var(--steel-500),var(--accent-2));border-color:transparent;color:#fff}
+.pf-btn.danger:hover{background:var(--danger-bg);border-color:var(--danger-line);color:var(--danger-t1)}
+#screen-login .avatar-preview .avc{overflow:hidden}
+#screen-login .avatar-preview .avc img{width:100%;height:100%;object-fit:cover;display:block}
+.sidebar-pin svg{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.sidebar-pin:not(.active) svg{transform:rotate(45deg)}
+.sidebar-pin.active{color:var(--accent);background:rgba(var(--c-accent),.16);box-shadow:0 0 0 1px rgba(var(--c-accent),.35),0 0 14px rgba(var(--c-accent),.28);animation:pinPop .45s var(--ease)}
+.sidebar-pin.active svg{transform:rotate(0) scale(1.18);fill:currentColor;fill-opacity:.28}
+@keyframes pinPop{0%{transform:scale(.8)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
 @media(max-width:1024px){.mobile-only{display:grid}.sidebar-pin{display:none}}
 .data-table-wrap{overflow-x:auto}.data-table-wrap table{min-width:680px}
 .crumbs{min-width:0;overflow:hidden;white-space:nowrap}.topbar-left{min-width:0}
@@ -706,7 +750,7 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 .rep-fav:hover{color:#e0b23c;transform:scale(1.12)}
 .rep-fav.on{color:#f0b83c}
 .rep-fav.on svg{fill:currentColor}
-.info-card{padding:8px 24px;max-width:680px}
+.info-card{padding:8px 24px;max-width:none}
 .info-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--text-2)}
 .info-row:last-child{border-bottom:none}.info-row strong{color:var(--text);font-weight:600}.info-row small{color:var(--text-4)}
 .info-card details{padding:14px 0;border-bottom:1px solid var(--line)}.info-card details:last-child{border:none}
@@ -1059,18 +1103,6 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 
       <nav class="sidebar-nav" id="sidebar-nav"></nav>
 
-      <div class="sidebar-foot">
-        <div class="profile-card">
-          <div class="pcava" id="pcava">DN</div>
-          <div class="pcinfo">
-            <div class="pcname" id="pcname">Usuário</div>
-            <div class="pcrole" id="pcrole">—</div>
-          </div>
-          <button class="pclogout" onclick="doLogout()" title="Sair">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          </button>
-        </div>
-      </div>
     </aside>
     <main class="main" id="main">
       <header class="topbar">
@@ -1090,51 +1122,19 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
           </div>
           <button class="btn-icon-sq" id="btn-refresh" onclick="refreshCurrent()" title="Atualizar dados" aria-label="Atualizar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg></button>
           <button class="theme-btn btn-icon-sq" onclick="toggleTheme()" title="Alternar tema claro / escuro" aria-label="Alternar tema"></button>
-          <div class="search-mini" id="search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Buscar módulos, relatórios…</span><kbd>⌘K</kbd></div>
           <div class="session-chip"><span class="sdot"></span><span id="session-time">00:00</span></div>
+          <button class="user-chip" id="user-chip" type="button" onclick="navTo('profile')" title="Meu perfil">
+            <span class="uc-ava" id="pcava">DN</span>
+            <span class="uc-info"><b id="pcname">Usuário</b><small id="pcrole">—</small></span>
+          </button>
+          <button class="btn-icon-sq btn-logout" type="button" onclick="doLogout()" title="Sair" aria-label="Sair"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
         </div>
       </header>
       <div class="content view" id="view-panel" style="display:none">
         <div class="greet"><span class="greet-ico" id="greet-ico"></span><div><h2 id="greet-title"></h2><p id="greet-sub"></p></div></div>
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-top">
-              <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-              <span class="stat-trend">◆ ativo</span>
-            </div>
-            <div class="stat-lbl">Módulos disponíveis</div>
-            <div class="stat-val" id="stat-modules">—</div>
-          </div>
-          <div class="stat">
-            <div class="stat-top">
-              <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-              <span class="stat-trend">↑ +12%</span>
-            </div>
-            <div class="stat-lbl">Relatórios cadastrados</div>
-            <div class="stat-val" id="stat-reports">—</div>
-          </div>
-          <div class="stat">
-            <div class="stat-top">
-              <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
-              <span class="stat-trend">▲ liberado</span>
-            </div>
-            <div class="stat-lbl">Seus acessos</div>
-            <div class="stat-val" id="stat-access">—</div>
-          </div>
-          <div class="stat">
-            <div class="stat-top">
-              <div class="stat-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-              <span class="stat-trend">● online</span>
-            </div>
-            <div class="stat-lbl">Duração da sessão</div>
-            <div class="stat-val" id="session-time-big" style="font-family:'JetBrains Mono',monospace;font-size:26px">00:00</div>
-          </div>
-        </div>
-
         <div class="page-hero">
           <div class="titles">
-            <span class="kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Central de Inteligência</span>
-            <h1 class="page-title">Painel de <em>Módulos</em></h1>
+            <h1 class="page-title">Painel de Módulos</h1>
             <p class="page-sub">Selecione um módulo para explorar seus dashboards analíticos e relatórios Power BI integrados.</p>
           </div>
           <button class="btn-primary-sm" id="btn-add-module" onclick="openModuleModal()" style="display:none">
@@ -1154,7 +1154,6 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
         </button>
         <div class="page-hero">
           <div class="titles">
-            <span class="kicker" id="reports-tag">Módulo</span>
             <h1 class="page-title" id="reports-title">Painéis</h1>
             <p class="page-sub" id="reports-desc"></p>
           </div>
@@ -1180,11 +1179,11 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
           <iframe id="dash-iframe" src="" title="Dashboard Power BI" allowfullscreen></iframe>
         </div></div>
       </div>
-      <div class="content view" id="view-my-reports" style="display:none"><div class="page-hero"><div class="titles"><span class="kicker">⬡ Meus acessos</span><h1 class="page-title">Meus <em>Painéis</em></h1><p class="page-sub">Relatórios liberados para o seu perfil, com o módulo de cada um.</p></div></div><div class="reports-grid" id="my-reports-grid"></div></div>
-      <div class="content view" id="view-favorites" style="display:none"><div class="page-hero"><div class="titles"><span class="kicker">★ Meus acessos</span><h1 class="page-title"><em>Favoritos</em></h1><p class="page-sub">Os relatórios que você marcou com a estrela, para acessar mais rápido.</p></div></div><div class="reports-grid" id="favorites-grid"></div></div>
+      <div class="content view" id="view-my-reports" style="display:none"><div class="page-hero"><div class="titles"><h1 class="page-title">Meus Painéis</h1><p class="page-sub">Relatórios liberados para o seu perfil, com o módulo de cada um.</p></div></div><div class="reports-grid" id="my-reports-grid"></div></div>
+      <div class="content view" id="view-favorites" style="display:none"><div class="page-hero"><div class="titles"><h1 class="page-title">Favoritos</h1><p class="page-sub">Os relatórios que você marcou com a estrela, para acessar mais rápido.</p></div></div><div class="reports-grid" id="favorites-grid"></div></div>
       <!-- ─── VIEW: ADMIN USERS ─── -->
     <div id="view-admin-users" class="view content" style="display:none">
-      <div class="page-hero"><div class="titles"><span class="kicker">⚙ Admin</span><h1 class="page-title">Gerenciar Usuários</h1><p class="page-sub">Cadastre, edite e exclua usuários. Solicitações de cadastro são aprovadas na guia Permissões.</p></div>
+      <div class="page-hero"><div class="titles"><h1 class="page-title">Gerenciar Usuários</h1><p class="page-sub">Cadastre, edite e exclua usuários. Solicitações de cadastro são aprovadas na guia Permissões.</p></div>
         <button class="btn-primary-sm" onclick="openUserModal()">+ Novo Usuário</button></div>
       <div class="data-table-wrap">
         <div class="data-table-header">
@@ -1199,7 +1198,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 
     <!-- ─── VIEW: ADMIN MODULES ─── -->
     <div id="view-admin-modules" class="view content" style="display:none">
-      <div class="page-hero"><div class="titles"><span class="kicker">⚙ Admin</span><h1 class="page-title">Gerenciar Módulos</h1><p class="page-sub">Crie, edite e organize os módulos do portal.</p></div>
+      <div class="page-hero"><div class="titles"><h1 class="page-title">Gerenciar Módulos</h1><p class="page-sub">Crie, edite e organize os módulos do portal.</p></div>
         <button class="btn-primary-sm" onclick="openModuleModal()">+ Novo Módulo</button>
       </div>
       <div class="data-table-wrap">
@@ -1209,7 +1208,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 
     <!-- ─── VIEW: ADMIN REPORTS ─── -->
     <div id="view-admin-reports" class="view content" style="display:none">
-      <div class="page-hero"><div class="titles"><span class="kicker">⚙ Admin</span><h1 class="page-title">Gerenciar Relatórios</h1><p class="page-sub">Cadastre e gerencie os relatórios e suas URLs do Power BI.</p></div>
+      <div class="page-hero"><div class="titles"><h1 class="page-title">Gerenciar Painéis</h1><p class="page-sub">Cadastre e gerencie os relatórios e suas URLs do Power BI.</p></div>
         <button class="btn-primary-sm" onclick="openReportModal(null,null)">+ Novo Relatório</button>
       </div>
       <div class="data-table-wrap">
@@ -1222,7 +1221,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 
     <!-- ─── VIEW: ADMIN PERMISSIONS ─── -->
     <div id="view-admin-permissions" class="view content" style="display:none">
-      <div class="page-hero"><div class="titles"><span class="kicker">⚙ Admin</span><h1 class="page-title">Gerenciar Permissões</h1><p class="page-sub">Defina quais relatórios cada usuário pode acessar.</p></div></div>
+      <div class="page-hero"><div class="titles"><h1 class="page-title">Gerenciar Permissões</h1><p class="page-sub">Defina quais relatórios cada usuário pode acessar.</p></div></div>
       <div class="data-table-wrap" id="perm-pending-wrap" style="display:none;margin-bottom:20px">
         <div class="data-table-header"><h3>⏳ Solicitações de Cadastro</h3><span class="rep-meta" id="perm-pending-count"></span></div>
         <div style="overflow-x:auto"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Departamento</th><th>Cargo</th><th>Solicitado em</th><th>Ações</th></tr></thead><tbody id="perm-pending-tbody"></tbody></table></div>
@@ -1237,9 +1236,9 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
     </div>
 
       <div class="content view" id="view-admin-report-access" style="display:none">
-        <div class="page-hero"><div class="titles"><span class="kicker">⚙ Administração</span><h1 class="page-title">Liberação de <em>Relatório</em></h1><p class="page-sub">Aprove pedidos de acesso e acompanhe os relatórios liberados por usuário.</p></div></div>
+        <div class="page-hero"><div class="titles"><h1 class="page-title">Liberação de Painéis</h1><p class="page-sub">Aprove pedidos de acesso e acompanhe os relatórios liberados por usuário.</p></div></div>
         <div class="data-table-wrap" style="margin-bottom:20px">
-          <div class="data-table-header"><h3>⏳ Liberação de Relatório</h3><span class="rep-meta" id="req-count"></span></div>
+          <div class="data-table-header"><h3>⏳ Liberação de Painéis</h3><span class="rep-meta" id="req-count"></span></div>
           <table><thead><tr><th>Usuário</th><th>Departamento</th><th>Relatório</th><th>Módulo</th><th>Solicitado em</th><th>Ações</th></tr></thead><tbody id="req-pending-tbody"></tbody></table>
         </div>
         <div class="data-table-wrap">
@@ -1248,7 +1247,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
         </div>
       </div>
       <div class="content view" id="view-admin-history" style="display:none">
-        <div class="page-hero"><div class="titles"><span class="kicker">⚙ Administração</span><h1 class="page-title">Histórico de <em>Solicitações</em></h1><p class="page-sub">Todas as solicitações de cadastro e de acesso a relatórios, com o status de cada uma.</p></div></div>
+        <div class="page-hero"><div class="titles"><h1 class="page-title">Histórico de Solicitações</h1><p class="page-sub">Todas as solicitações de cadastro e de acesso a relatórios, com o status de cada uma.</p></div></div>
         <div class="data-table-wrap">
           <div class="data-table-header">
             <h3>Solicitações</h3>
@@ -1261,7 +1260,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
       </div>
       <div class="content view" id="view-admin-analytics" style="display:none">
         <div class="page-hero">
-          <div class="titles"><span class="kicker">⚙ Administração</span><h1 class="page-title"><em>Dashboard</em> de Indicadores</h1><p class="page-sub">Aderência ao portal e uso dos relatórios, com o detalhamento por relatório, módulo e usuário.</p></div>
+          <div class="titles"><h1 class="page-title">Indicadores de Uso</h1><p class="page-sub">Aderência ao portal e uso dos relatórios, com o detalhamento por relatório, módulo e usuário.</p></div>
           <div class="an-period" id="an-period">
             <button class="an-period-btn" data-d="7" onclick="setAnalyticsPeriod(7)">7 dias</button>
             <button class="an-period-btn active" data-d="30" onclick="setAnalyticsPeriod(30)">30 dias</button>
@@ -1296,7 +1295,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
           </div>
         </div>
       </div>
-      <div class="content view" id="view-settings" style="display:none"><div class="page-hero"><div class="titles"><span class="kicker">Conta</span><h1 class="page-title"><em>Configurações</em></h1><p class="page-sub">Preferências da sua interface.</p></div></div><div class="data-table-wrap info-card" id="set-report-auth" style="display:none;margin-bottom:16px;padding:20px 24px">
+      <div class="content view" id="view-settings" style="display:none"><div class="page-hero"><div class="titles"><h1 class="page-title">Configurações</h1><p class="page-sub">Preferências da sua interface.</p></div></div><div class="data-table-wrap info-card" id="set-report-auth" style="display:none;margin-bottom:16px;padding:20px 24px">
         <h3 style="font-size:15px;margin-bottom:4px;color:var(--text)">Login nos relatórios (Power BI)</h3>
         <p style="font-size:12.5px;color:var(--text-3);line-height:1.6;margin-bottom:14px">Define como o usuário se autentica ao abrir um relatório Power BI.</p>
         <div class="mfield"><label>Modo de login</label><select id="ra-mode" onchange="raToggle()"><option value="default">Padrão (como hoje)</option><option value="sso">Automático — login Microsoft / Windows (SSO)</option></select></div>
@@ -1307,8 +1306,8 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
         <button class="btn-save" style="margin-top:14px" onclick="saveReportAuth()"><span class="lb">Salvar</span></button>
       </div>
       <div class="data-table-wrap info-card"><div class="info-row"><span>Manter menu lateral fixo<br><small>Sem fixar, o menu expande ao passar o mouse e recolhe automaticamente. O estado fica salvo neste navegador.</small></span><div class="toggle" id="set-collapse" onclick="setPinned(!document.getElementById('sidebar').classList.contains('pinned'))"></div></div><div class="info-row"><span>Versão do portal</span><strong>DataNexus · v2.0</strong></div></div></div>
-      <div class="content view" id="view-profile" style="display:none"><div class="page-hero"><div class="titles"><span class="kicker">Conta</span><h1 class="page-title">Meu <em>Perfil</em></h1><p class="page-sub">Seus dados de acesso ao portal.</p></div></div><div class="data-table-wrap info-card" id="profile-body"></div><div class="data-table-wrap info-card" style="margin-top:16px;padding:20px 24px"><div class="mrow"><div class="mfield"><label>Nova senha</label><input type="password" id="pw-new" placeholder="Crie uma senha" oninput="renderPwChecklist('pw-new-checklist',this.value)"></div><div class="mfield"><label>Confirmar</label><input type="password" id="pw-new2" placeholder="Repita a senha"></div></div><div class="pw-checklist" id="pw-new-checklist"></div><button class="btn-save" style="margin-top:16px" onclick="changePassword()"><span class="lb">Atualizar senha</span></button></div></div>
-      <div class="content view" id="view-help" style="display:none"><div class="page-hero"><div class="titles"><span class="kicker">Conta</span><h1 class="page-title">Central de <em>Ajuda</em></h1><p class="page-sub">Dúvidas frequentes sobre o portal.</p></div></div><div class="data-table-wrap info-card"><details><summary>Como acesso um relatório?</summary><p>Abra um módulo no Início e clique no relatório desejado. Relatórios com cadeado estão bloqueados para o seu perfil.</p></details><details><summary>Como solicito acesso a um relatório bloqueado?</summary><p>Clique em "Solicitar" no card do relatório e confirme o pedido ao administrador.</p></details><details><summary>Como recolho o menu lateral?</summary><p>Use o botão de menu no canto superior esquerdo. A preferência fica salva no navegador.</p></details><details><summary>Esqueci minha senha</summary><p>Na tela de login use "Esqueci a senha", ou altere a senha em Meu perfil quando estiver logado.</p></details></div></div>
+      <div class="content view" id="view-profile" style="display:none"><div class="page-hero"><div class="titles"><h1 class="page-title">Meu Perfil</h1><p class="page-sub">Seus dados de acesso ao portal.</p></div></div><div class="data-table-wrap info-card" id="profile-body"></div><div class="data-table-wrap info-card" style="margin-top:16px;padding:20px 24px"><div class="mrow"><div class="mfield"><label>Nova senha</label><input type="password" id="pw-new" placeholder="Crie uma senha" oninput="renderPwChecklist('pw-new-checklist',this.value)"></div><div class="mfield"><label>Confirmar</label><input type="password" id="pw-new2" placeholder="Repita a senha"></div></div><div class="pw-checklist" id="pw-new-checklist"></div><button class="btn-save" style="margin-top:16px" onclick="changePassword()"><span class="lb">Atualizar senha</span></button></div></div>
+      <div class="content view" id="view-help" style="display:none"><div class="page-hero"><div class="titles"><h1 class="page-title">Central de Ajuda</h1><p class="page-sub">Dúvidas frequentes sobre o portal.</p></div></div><div class="data-table-wrap info-card"><details><summary>Como acesso um relatório?</summary><p>Abra um módulo no Início e clique no relatório desejado. Relatórios com cadeado estão bloqueados para o seu perfil.</p></details><details><summary>Como solicito acesso a um relatório bloqueado?</summary><p>Clique em "Solicitar" no card do relatório e confirme o pedido ao administrador.</p></details><details><summary>Como recolho o menu lateral?</summary><p>Use o botão de menu no canto superior esquerdo. A preferência fica salva no navegador.</p></details><details><summary>Esqueci minha senha</summary><p>Na tela de login use "Esqueci a senha", ou altere a senha em Meu perfil quando estiver logado.</p></details></div></div>
     </main>
   </div>
 </div>
@@ -1565,7 +1564,7 @@ let cachedModules=[],cachedReports={},myPermissions=new Set(),myFavorites=new Se
 // ═══════════════════════════════════════════════════
 let allModules=[],allReports=[],allUsers=[],currentModuleId=null,_view='panel',_nav='panel',dashOrigin='mod-reports';
 const ADMIN_VIEWS=['admin-report-access','admin-users','admin-history','admin-analytics','admin-modules','admin-reports','admin-permissions'];
-const CRUMBS={panel:['Início','Módulos'],'my-reports':['Início','Painéis'],favorites:['Início','Favoritos'],'admin-analytics':['Administração','Dashboard'],'admin-users':['Administração','Usuários'],'admin-modules':['Administração','Módulos'],'admin-reports':['Administração','Gerenciar Relatórios'],'admin-permissions':['Permissões','Liberação de Cadastro'],'admin-report-access':['Permissões','Liberação de Relatório'],'admin-history':['Administração','Histórico'],settings:['Conta','Configurações'],profile:['Conta','Meu perfil'],help:['Conta','Ajuda']};
+const CRUMBS={panel:['Início','Módulos'],'my-reports':['Início','Meus Painéis'],favorites:['Início','Favoritos'],'admin-analytics':['Administração','Dashboard'],'admin-users':['Administração','Usuários'],'admin-modules':['Administração','Gerenciar Módulos'],'admin-reports':['Administração','Gerenciar Painéis'],'admin-permissions':['Permissões','Liberação de Cadastro'],'admin-report-access':['Permissões','Liberação de Painéis'],'admin-history':['Administração','Histórico'],settings:['Conta','Configurações'],profile:['Conta','Meu perfil'],help:['Conta','Ajuda']};
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function currentView(){return _view}
 function loadAdminHome(){refreshPendingBadge();if(_view==='admin-permissions')loadPermUsersTable()}
@@ -1587,7 +1586,6 @@ function showView(v,nav){
   el.style.display=v==='dashboard'?'flex':'block';
   _view=v;
   if(nav){_nav=nav;document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.nav===nav))}
-  document.getElementById('search-mini').style.display=v==='panel'?'':'none';
   renderCrumbs(v);
   document.getElementById('main').scrollTop=0;
   if(window.innerWidth<=1024)document.getElementById('sidebar').classList.remove('open');
@@ -1599,7 +1597,7 @@ function renderCrumbs(v){
   
   let p;
   if(v==='mod-reports')p=[c('Início',P),c('Módulos',P),c(m)];
-  else if(v==='dashboard')p=dashOrigin==='my-reports'?[c('Início',P),c('Painéis',"navTo('myreports')"),c(r)]:dashOrigin==='favorites'?[c('Início',P),c('Favoritos',"navTo('favorites')"),c(r)]:[c('Início',P),c('Módulos',P),c(m,"showView('mod-reports')"),c(r)];
+  else if(v==='dashboard')p=dashOrigin==='my-reports'?[c('Início',P),c('Meus Painéis',"navTo('myreports')"),c(r)]:dashOrigin==='favorites'?[c('Início',P),c('Favoritos',"navTo('favorites')"),c(r)]:[c('Início',P),c('Módulos',P),c(m,"showView('mod-reports')"),c(r)];
   else p=(CRUMBS[v]||[v]).map(x=>c(x));
   document.getElementById('crumbs').innerHTML=p.join('<span class="sep">›</span>');
 }
@@ -1634,6 +1632,13 @@ function toggleSidebar(){
   const s=document.getElementById('sidebar');
   if(window.innerWidth>1024)setPinned(!s.classList.contains('pinned'));
   else s.classList.toggle('open');
+}
+function resetSidebarOnLogin(){
+  const s=document.getElementById('sidebar');
+  s.classList.remove('pinned','open');s.classList.add('collapsed');
+  const b=document.getElementById('btn-sidebar-pin');if(b){b.classList.remove('active');b.title='Fixar menu'}
+  document.getElementById('set-collapse')?.classList.remove('on');
+  permOpen=false;
 }
 function setPinned(v){
   const s=document.getElementById('sidebar');
@@ -1671,13 +1676,13 @@ function togglePermMenu(){permOpen=!permOpen;document.querySelector('.nav-group'
 function buildSidebar(){
   NAV.myreports=NAV.reports;NAV.permreq=NAV.reports;
   const ad=!!currentProfile?.is_admin,nm=cachedModules.length||'',np=myPermissions.size||'';
-  const perms=`<div class="nav-group${permOpen?' open':''}"><div class="nav-item nav-group-head${['perms','permreq'].includes(_nav)?' has-active':''}" title="Permissões" onclick="togglePermMenu()">${NAV.perms}<span class="nav-text">Permissões</span><svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div><div class="nav-sub">${navItem('perms','Liberação de Cadastro','pending',1)}${navItem('permreq','Liberação de Relatório','req',1)}</div></div>`;
+  const perms=`<div class="nav-group${permOpen?' open':''}"><div class="nav-item nav-group-head${['perms','permreq'].includes(_nav)?' has-active':''}" title="Permissões" onclick="togglePermMenu()">${NAV.perms}<span class="nav-text">Permissões</span><svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div><div class="nav-sub"><div class="nav-sub-in">${navItem('perms','Liberação de Cadastro','pending',1)}${navItem('permreq','Liberação de Painéis','req',1)}</div></div></div>`;
   const sections=ad?[
-    ['Principal',[['panel','Início'],['analytics','Dashboard'],['modules','Módulos'],['myreports','Painéis'],['favorites','Favoritos']]],
-    ['Administração',[['reports','Gerenciar Relatórios'],['users','Usuários'],perms,['history','Histórico'],['settings','Configurações']]],
+    ['Principal',[['panel','Início'],['analytics','Dashboard'],['myreports','Meus Painéis'],['favorites','Favoritos']]],
+    ['Administração',[['modules','Gerenciar Módulos'],['reports','Gerenciar Painéis'],['users','Usuários'],perms,['history','Histórico'],['settings','Configurações']]],
     ['Conta',[['profile','Meu perfil'],['help','Ajuda']]]
   ]:[
-    ['Principal',[['panel','Início'],['modules','Meus Módulos'],['myreports','Painéis'],['favorites','Favoritos']]],
+    ['Principal',[['panel','Início'],['myreports','Meus Painéis'],['favorites','Favoritos']]],
     ['Conta',[['profile','Meu perfil'],['help','Ajuda']]]
   ];
   document.getElementById('sidebar-nav').innerHTML=sections.map(([tt,its])=>`<div class="nav-section"><div class="nav-label">${tt}</div>${its.map(i=>typeof i==='string'?i:navItem(...i)).join('')}</div>`).join('');
@@ -1818,7 +1823,7 @@ async function doLogin(){
     try{const {data:prev,error:e0}=await sb.rpc('register_login');if(e0)throw e0;isFirstLogin=!prev}
     catch(_){try{const k='dn_seen_'+currentUser.id;isFirstLogin=!localStorage.getItem(k);localStorage.setItem(k,'1')}catch(e){}}
     sb.from('login_log').insert({user_id:currentUser.id}).then(()=>{}).catch(()=>{});
-    setupUI();await loadAppData();
+    resetSidebarOnLogin();setupUI();await loadAppData();
     await LoginFx.success(currentProfile.full_name.split(' ')[0]);
     goTo('app');ok=true;LoginFx.reveal();
     showToast(`${isFirstLogin?'Bem-vindo':'Bem-vindo de volta'}, ${currentProfile.full_name.split(' ')[0]}!`,'success');
@@ -1913,7 +1918,7 @@ async function doLogout(){
 // ═══════════════════════════════════════════════════
 function setupUI(){
   const $=id=>document.getElementById(id),name=currentProfile.full_name||'Usuário',ad=!!currentProfile.is_admin;
-  $('pcava').textContent=name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  applyUserAvatar();
   $('pcname').textContent=name;
   $('pcrole').textContent=currentProfile.role_title?`${currentProfile.role_title} · ${currentProfile.department||''}`:(currentProfile.email||'');
   $('scope-chip').classList.toggle('user',!ad);$('scope-label').textContent=ad?'Modo Administrador':'Modo Usuário';
@@ -1944,9 +1949,6 @@ async function loadAppData(){
   if(currentProfile.is_full_access||currentProfile.is_admin)allReports.forEach(r=>myPermissions.add(r.id));
   else (permRes.data||[]).forEach(p=>myPermissions.add(p.report_id));
   myFavorites=new Set((favRes.data||[]).map(f=>f.report_id));
-  document.getElementById('stat-modules').textContent=cachedModules.length;
-  document.getElementById('stat-reports').textContent=allReports.length;
-  document.getElementById('stat-access').textContent=(currentProfile.is_full_access||currentProfile.is_admin)?allReports.length:myPermissions.size;
   buildSidebar();buildModules();loadReportAuth();
 }
 
@@ -1985,7 +1987,6 @@ function handleModuleClick(e,id){if(e.target.closest('.mod-admin'))return;openMo
 function openModule(id){
   currentModule=cachedModules.find(m=>m.id===id);if(!currentModule)return;
   currentModuleId=id;document.getElementById('btn-add-report').style.display=currentProfile?.is_admin?'inline-flex':'none';
-  document.getElementById('reports-tag').textContent='⬡ '+currentModule.name;
   document.getElementById('reports-title').textContent='Painéis · '+currentModule.name;
   document.getElementById('reports-desc').textContent=currentModule.description||'';
   buildReports(id);showView('mod-reports');
@@ -2010,7 +2011,7 @@ async function toggleFavorite(reportId,ev){
     showToast('Erro ao favoritar: '+error.message,'error');
   }
 }
-function buildFavorites(){fillReports('favorites-grid',Object.values(cachedReports).flat().filter(r=>myFavorites.has(r.id)),true)}
+function buildFavorites(){fillReports('favorites-grid',Object.values(cachedReports).flat().filter(r=>myFavorites.has(r.id)&&myPermissions.has(r.id)),true)}
 function fillReports(gridId,reports,showMod){
   const grid=document.getElementById(gridId);
   if(!reports.length){grid.innerHTML='<div style="color:var(--text-3);font-size:13px;padding:24px;grid-column:1/-1;text-align:center">Nenhum relatório disponível.</div>';return}
@@ -2639,7 +2640,7 @@ async function toggleModuleAll(modId){
 // ═══════════════════════════════════════════════════
 function renderProfile(){
   const p=currentProfile;
-  document.getElementById('profile-body').innerHTML=[['Nome',p.full_name],['E-mail',p.email||currentUser?.email],['Departamento',p.department],['Cargo',p.role_title],['Perfil',p.is_admin?'Administrador':p.is_full_access?'Usuário · Full Access':'Usuário padrão'],['Relatórios liberados',(p.is_full_access||p.is_admin)?allReports.length:myPermissions.size]].map(([k,v])=>`<div class="info-row"><span>${k}</span><strong>${esc(v??'—')}</strong></div>`).join('');
+  document.getElementById('profile-body').innerHTML=profilePhotoHtml()+[['Nome',p.full_name],['E-mail',p.email||currentUser?.email],['Departamento',p.department],['Cargo',p.role_title],['Perfil',p.is_admin?'Administrador':p.is_full_access?'Usuário · Full Access':'Usuário padrão'],['Relatórios liberados',(p.is_full_access||p.is_admin)?allReports.length:myPermissions.size]].map(([k,v])=>`<div class="info-row"><span>${k}</span><strong>${esc(v??'—')}</strong></div>`).join('');
 }
 async function changePassword(){
   const a=document.getElementById('pw-new').value,b=document.getElementById('pw-new2').value;
@@ -2649,6 +2650,62 @@ async function changePassword(){
   if(error)return showToast('Erro: '+error.message,'error');
   document.getElementById('pw-new').value=document.getElementById('pw-new2').value='';renderPwChecklist('pw-new-checklist','');
   showToast('Senha atualizada!','success');
+}
+
+// ═══ Foto do perfil / avatar ═══
+const avKey=email=>'dn_avatar_'+String(email||'').trim().toLowerCase();
+function getSavedAvatar(email){try{return localStorage.getItem(avKey(email))}catch(e){return null}}
+function currentAvatar(){
+  if(!currentProfile)return null;
+  const em=currentProfile.email||currentUser?.email;
+  return getSavedAvatar(em)||currentProfile.avatar_url||null;
+}
+function initialsOf(name){return (name||'U').trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase()}
+function avatarInner(url,name){return url?`<img src="${esc(url)}" alt="">`:esc(initialsOf(name))}
+const nmKey=email=>'dn_name_'+String(email||'').trim().toLowerCase();
+function getSavedName(email){try{return localStorage.getItem(nmKey(email))}catch(e){return null}}
+function applyUserAvatar(){
+  try{const e0=currentProfile?.email||currentUser?.email;if(e0&&currentProfile?.full_name)localStorage.setItem(nmKey(e0),currentProfile.full_name)}catch(e){}
+  const name=currentProfile?.full_name||'Usuário',url=currentAvatar();
+  const em=currentProfile?.email||currentUser?.email;
+  // guarda uma cópia local da foto vinda do banco para o avatar da tela de login
+  if(url&&em&&!getSavedAvatar(em)){try{localStorage.setItem(avKey(em),url)}catch(e){}}
+  const a=document.getElementById('pcava');if(a)a.innerHTML=avatarInner(url,name);
+  const p=document.getElementById('pf-ava');if(p)p.innerHTML=avatarInner(url,name);
+}
+function profilePhotoHtml(){
+  const name=currentProfile?.full_name||'Usuário',url=currentAvatar();
+  return `<div class="pf-photo"><div class="pf-ava" id="pf-ava">${avatarInner(url,name)}</div><div><h4>Foto do perfil</h4><p>Escolha uma imagem do seu computador. Ela aparece no topo do portal e na tela de login.</p><div class="pf-actions"><button class="pf-btn primary" type="button" onclick="document.getElementById('pf-file').click()">Escolher foto</button>${url?'<button class="pf-btn danger" type="button" onclick="removeAvatar()">Remover</button>':''}</div><input type="file" id="pf-file" accept="image/*" style="display:none" onchange="onAvatarFile(this)"></div></div>`;
+}
+function onAvatarFile(inp){
+  const f=inp.files&&inp.files[0];inp.value='';
+  if(!f)return;
+  if(!/^image\//.test(f.type))return showToast('Selecione um arquivo de imagem.','error');
+  if(f.size>8*1024*1024)return showToast('Imagem muito grande (máx. 8 MB).','error');
+  const img=new Image(),fr=new FileReader();
+  fr.onload=()=>{img.onload=()=>{
+    const N=256,c=document.createElement('canvas');c.width=c.height=N;
+    const side=Math.min(img.width,img.height),sx=(img.width-side)/2,sy=(img.height-side)/2;
+    c.getContext('2d').drawImage(img,sx,sy,side,side,0,0,N,N);
+    saveAvatar(c.toDataURL('image/jpeg',.85));
+  };img.onerror=()=>showToast('Não foi possível ler a imagem.','error');img.src=fr.result};
+  fr.readAsDataURL(f);
+}
+async function saveAvatar(url){
+  const em=currentProfile.email||currentUser?.email;
+  try{localStorage.setItem(avKey(em),url)}catch(e){showToast('Não foi possível salvar a foto neste navegador.','error');return}
+  currentProfile.avatar_url=url;
+  applyUserAvatar();renderProfile();
+  // tenta guardar também no perfil (precisa da coluna avatar_url em profiles); sem ela, a foto fica neste navegador
+  const {error}=await sb.from('profiles').update({avatar_url:url}).eq('id',currentProfile.id);
+  showToast(error?'Foto atualizada neste navegador.':'Foto atualizada!',error?'warn':'success');
+}
+async function removeAvatar(){
+  const em=currentProfile.email||currentUser?.email;
+  try{localStorage.removeItem(avKey(em))}catch(e){}
+  currentProfile.avatar_url=null;applyUserAvatar();renderProfile();
+  await sb.from('profiles').update({avatar_url:null}).eq('id',currentProfile.id);
+  showToast('Foto removida.','success');
 }
 let _historyCache=[];
 async function loadHistory(){
@@ -2839,9 +2896,9 @@ document.getElementById('input-email').addEventListener('input',function(){
   const wrap=document.getElementById('avatar-preview'),avc=document.getElementById('avc');
   if(v){
     wrap.classList.add('has-user');
-    const i=v.split('@')[0].slice(0,2).toUpperCase();
-    avc.innerHTML=`<div style="font-family:'Bricolage Grotesque',serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em">${i}</div>`;
-    document.getElementById('av-name').textContent=v.split('@')[0];
+    const i=(getSavedName(v)?initialsOf(getSavedName(v)):v.split('@')[0].slice(0,2).toUpperCase()),photo=getSavedAvatar(v);
+    avc.innerHTML=photo?`<img src="${photo.replace(/"/g,'')}" alt="">`:`<div style="font-family:'Bricolage Grotesque',serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em">${i}</div>`;
+    document.getElementById('av-name').textContent=getSavedName(v)||v.split('@')[0];
     document.getElementById('av-desc').textContent='Insira sua senha para continuar.';
   } else {
     wrap.classList.remove('has-user');
