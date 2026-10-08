@@ -85,7 +85,7 @@ body::before{
 /* ═══════════════════════════════════════════════════
    LOGIN
    ═══════════════════════════════════════════════════ */
-#screen-login{align-items:center;justify-content:center;padding:24px;z-index:20}
+#screen-login{align-items:center;justify-content:center;padding:64px 24px 24px;z-index:20;overflow-y:auto}
 .login-shell{position:relative;z-index:3;width:100%;max-width:1120px;display:grid;grid-template-columns:1.05fr .95fr;gap:0;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,rgba(var(--c-surface),.7),rgba(var(--c-ink900),.7));border:1px solid var(--line-2);backdrop-filter:blur(28px) saturate(140%);box-shadow:var(--sh-3)}
 .login-aside{position:relative;padding:56px 52px;display:flex;flex-direction:column;justify-content:space-between;background:
   radial-gradient(600px 400px at 10% 90%,rgba(78,111,149,.22),transparent 55%),
@@ -144,6 +144,214 @@ body::before{
 .btn-primary:active{transform:translateY(0)}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .spinner-sm{width:16px;height:16px;border:2px solid rgba(255,255,255,.28);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+
+
+/* ═══════════════════════════════════════════════════════════
+   LOGIN v2 · refinamento visual (escopo: #screen-login)
+   ═══════════════════════════════════════════════════════════ */
+#screen-login .login-shell{max-width:1080px;border-radius:32px;
+  background:linear-gradient(180deg,rgba(var(--c-surface),.62),rgba(var(--c-ink900),.72));
+  border:1px solid var(--line-2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--sh-3),0 50px 120px -50px rgba(var(--c-accent),.28)}
+/* ── aside ── */
+#screen-login .login-aside{padding:52px 52px 48px;min-height:660px;border-right:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(var(--c-ink750),.5),rgba(var(--c-ink850),.5))}
+#screen-login .login-aside::after{opacity:.8}
+#screen-login .login-aside > .aurora{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.aurora i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.aurora .a1{width:380px;height:380px;left:-90px;bottom:-110px;background:rgba(78,111,149,.55);animation:auroraA 18s ease-in-out infinite alternate}
+.aurora .a2{width:300px;height:300px;right:-80px;top:-60px;background:rgba(var(--c-accent),.30);animation:auroraB 22s ease-in-out infinite alternate}
+@keyframes auroraA{to{transform:translate(70px,-50px) scale(1.15)}}
+@keyframes auroraB{to{transform:translate(-60px,60px) scale(1.2)}}
+#screen-login .brand-glyph{border-radius:13px;box-shadow:0 12px 28px -6px rgba(78,111,149,.55),inset 0 1px 0 rgba(255,255,255,.22)}
+.hl-stack{display:grid}
+.hl{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(16px);filter:blur(4px);
+  transition:opacity .35s var(--ease),transform .5s var(--ease),filter .35s var(--ease),visibility 0s linear .5s}
+.hl.on{opacity:1;visibility:visible;transform:none;filter:none;transition-delay:.18s,.18s,.18s,0s}
+#screen-login .login-headline h1{font-size:clamp(34px,3.7vw,48px);line-height:1.04;letter-spacing:-.04em;margin-top:22px}
+#screen-login .login-headline p{font-size:14.5px;line-height:1.7;max-width:400px;margin-top:18px}
+#screen-login .login-headline .kicker{padding:6px 12px 6px 10px;background:rgba(var(--c-accent),.07);border-color:rgba(var(--c-accent),.2)}
+.steps{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-direction:column;gap:0}
+.steps li{display:flex;gap:14px;align-items:flex-start;position:relative;padding-bottom:20px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:1px;background:linear-gradient(var(--line-3),transparent)}
+.steps li:last-child::before{display:none}
+.steps b{flex:0 0 27px;height:27px;border-radius:50%;display:grid;place-items:center;font:600 12px 'Bricolage Grotesque',serif;color:var(--accent);background:rgba(var(--c-accent),.1);border:1px solid rgba(var(--c-accent),.28)}
+.steps strong{display:block;font-size:13.5px;font-weight:600;color:var(--text);letter-spacing:-.005em}
+.steps span{display:block;font-size:12.5px;color:var(--text-3);margin-top:2px;line-height:1.5}
+.feats{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.feats li{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--text-2)}
+.feats li svg{flex:0 0 34px;width:34px;height:34px;padding:9px;border-radius:10px;color:var(--accent);background:rgba(var(--c-accent),.09);border:1px solid rgba(var(--c-accent),.2)}
+/* ── lado do formulário ── */
+#screen-login .login-form{padding:52px 56px 40px;background:linear-gradient(180deg,rgba(var(--c-ink900),.5),rgba(var(--c-ink850),.5))}
+#screen-login .form-header{margin-bottom:28px}
+#screen-login .form-header h2{font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+#screen-login .form-header p{font-size:13.5px;line-height:1.6;color:var(--text-3);margin-top:8px}
+.hdr-ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:18px;border-radius:13px;color:var(--accent);background:rgba(var(--c-accent),.09);border:1px solid rgba(var(--c-accent),.24);box-shadow:0 8px 22px -10px rgba(var(--c-accent),.5)}
+.back-link{display:inline-flex;align-items:center;gap:7px;margin:0 0 26px -4px;padding:6px 12px 6px 8px;background:none;border:1px solid transparent;border-radius:999px;color:var(--text-3);font:500 12.5px 'Geist',sans-serif;cursor:pointer;transition:var(--dur) var(--ease)}
+.back-link svg{transition:transform .3s var(--ease)}
+.back-link:hover{color:var(--text);background:rgba(var(--c-surface),.6);border-color:var(--line-2)}
+.back-link:hover svg{transform:translateX(-3px)}
+/* campos */
+#screen-login .field-stack{gap:18px}
+#screen-login .field label,#screen-login .label-row label{display:block;margin:0 0 8px;font-size:12.5px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--text-2)}
+#screen-login .label-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+#screen-login .label-row label{margin:0}
+#screen-login .field label .req{color:var(--accent)}
+.link-sm{position:relative;font-size:12px;font-weight:500;color:var(--accent);text-decoration:none;transition:color var(--dur) var(--ease)}
+.link-sm::after,.link-strong::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.link-sm:hover::after,.link-strong:hover::after{transform:scaleX(1);transform-origin:left}
+#screen-login .field-wrap svg.f-icon{left:16px;width:17px;height:17px;color:var(--text-4);transition:color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+#screen-login .field-wrap:focus-within svg.f-icon{color:var(--accent)}
+#screen-login .field-wrap input{height:50px;padding:0 46px 0 46px;border-radius:14px;font-size:14px;
+  background:rgba(var(--c-ink900),.55);border:1px solid var(--line-2);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.12);transition:border-color .25s var(--ease),background .25s var(--ease),box-shadow .35s var(--ease)}
+#screen-login .field-wrap input:hover{border-color:var(--line-3);background:rgba(var(--c-ink900),.75)}
+#screen-login .field-wrap input:focus{border-color:rgba(var(--c-accent),.75);background:rgba(var(--c-ink900),.9);
+  box-shadow:0 0 0 4px rgba(var(--c-accent),.13),0 10px 28px -12px rgba(var(--c-accent),.5)}
+#screen-login .field-wrap input:-webkit-autofill{-webkit-box-shadow:0 0 0 100px rgb(var(--c-ink850)) inset;-webkit-text-fill-color:var(--text);caret-color:var(--text)}
+#screen-login .field-wrap input::placeholder{color:var(--text-4);letter-spacing:0}
+#screen-login .eye-btn{right:8px;width:34px;height:34px;padding:0;border-radius:9px}
+#screen-login .eye-btn:hover{color:var(--accent);background:rgba(var(--c-accent),.1)}
+#screen-login .mrow{gap:14px}
+#screen-login .reg-fields{display:flex;flex-direction:column;gap:16px}
+#screen-login .pw-checklist{margin:0;padding:10px 12px;gap:6px 14px;border-radius:12px;background:rgba(var(--c-surface),.4)}
+/* digitação da senha: cadeado balança a cada tecla */
+#pw-wrap.key > svg.f-icon{animation:keyBump .3s var(--ease)}
+@keyframes keyBump{0%{translate:0 0;scale:1;rotate:0deg}40%{translate:0 -2px;scale:1.2;rotate:-8deg}100%{translate:0 0;scale:1;rotate:0deg}}
+/* lembrar-me com checkbox próprio */
+#screen-login .remember{position:relative;margin:6px 0 22px;gap:10px;font-size:12.5px;color:var(--text-3);transition:color var(--dur) var(--ease)}
+#screen-login .remember:hover{color:var(--text-2)}
+#screen-login .remember input{position:absolute;opacity:0;width:0;height:0}
+#screen-login .remember .cb{width:18px;height:18px;border-radius:6px;border:1px solid var(--line-3);background:rgba(var(--c-ink900),.6);display:grid;place-items:center;flex-shrink:0;transition:all .25s var(--ease)}
+#screen-login .remember .cb::after{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .25s var(--ease)}
+#screen-login .remember input:checked + .cb{background:linear-gradient(135deg,var(--steel-500),var(--accent-2));border-color:transparent;box-shadow:0 4px 12px -3px rgba(78,111,149,.6)}
+#screen-login .remember input:checked + .cb::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+#screen-login .remember input:focus-visible + .cb{box-shadow:0 0 0 4px rgba(var(--c-accent),.2)}
+/* botão principal */
+#screen-login .btn-primary{height:52px;padding:0 22px;margin-top:0;border-radius:14px;gap:10px;font-size:14.5px;letter-spacing:.005em;
+  background:linear-gradient(135deg,var(--steel-500) 0%,var(--accent-2) 55%,var(--accent) 140%);background-size:140% 100%;background-position:0 0;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 0 22px -2px rgba(78,111,149,.36),0 2px 8px rgba(3,8,16,.16),inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .3s var(--ease),box-shadow .35s var(--ease),background-position .6s var(--ease),filter .3s}
+#screen-login .btn-primary::before{background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s var(--ease)}
+#screen-login .btn-primary:hover:not(:disabled)::before{transform:translateX(120%)}
+#screen-login .btn-primary:hover:not(:disabled){transform:translateY(-1px);background-position:100% 0;box-shadow:0 0 30px -2px rgba(78,111,149,.46),0 2px 10px rgba(3,8,16,.14),inset 0 1px 0 rgba(255,255,255,.32)}
+#screen-login .btn-primary:active:not(:disabled){transform:translateY(0) scale(.985);box-shadow:0 0 16px -2px rgba(78,111,149,.38),inset 0 1px 0 rgba(255,255,255,.2)}
+#screen-login .btn-primary:focus-visible{outline:none;box-shadow:0 0 0 4px rgba(var(--c-accent),.3),0 0 22px -2px rgba(78,111,149,.36)}
+#screen-login .btn-primary .bp-arrow{flex-shrink:0;transition:transform .35s var(--ease)}
+#screen-login .btn-primary:hover:not(:disabled) .bp-arrow{transform:translateX(5px)}
+#screen-login .btn-primary:disabled{opacity:.85;filter:saturate(.8);cursor:progress}
+#screen-login .btn-primary:disabled .bp-arrow,#screen-login .btn-primary.loading .bp-arrow,#screen-login .btn-primary.loading .lb{display:none}
+#screen-login .btn-primary .ss{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+#screen-login .btn-primary.loading .ss{display:block}
+#reg-footer .btn-primary{margin-top:22px}
+#pane-forgot .field + .btn-primary{margin-top:20px}
+.alt-line{margin:20px 0 0;text-align:center;font-size:13px;color:var(--text-3)}
+.link-strong{position:relative;color:var(--accent);font-weight:600;text-decoration:none;transition:color var(--dur) var(--ease)}
+.link-strong:hover{color:var(--text)}
+#screen-login .form-footer{margin-top:30px;padding-top:18px}
+/* alertas elegantes */
+#screen-login .err-block,#screen-login .alert,#screen-login .success-block{align-items:flex-start;gap:11px;padding:12px 14px;border-radius:13px;font-size:12.5px;line-height:1.55;border:1px solid}
+#screen-login .err-block,#screen-login .alert.err{background:var(--danger-bg);border-color:var(--danger-line);color:var(--danger-t1)}
+#screen-login .success-block,#screen-login .alert.ok{background:var(--success-bg);border-color:var(--success-line);color:var(--success)}
+#screen-login .alert{display:none}
+#screen-login .alert.show{display:flex;animation:alertIn .45s var(--ease)}
+#screen-login .err-block.show{margin-bottom:18px;animation:alertIn .45s var(--ease)}
+#screen-login .alert.show{margin-bottom:18px}
+#screen-login .err-block > svg,#screen-login .alert > svg,#screen-login .success-block > svg{flex-shrink:0;margin-top:1px}
+#screen-login .success-block strong{font-weight:600}
+@keyframes alertIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+#screen-login .success-block{margin-bottom:16px}
+/* responsivo */
+@media(max-width:1024px){
+  #screen-login .login-aside{min-height:auto;padding:36px 40px 30px}
+  #screen-login .hl p,#screen-login .login-aside-meta,#screen-login .steps,#screen-login .feats{display:none}
+  #screen-login .login-headline h1{font-size:30px;margin-top:16px}
+  #screen-login .login-form{padding:36px 40px 32px}
+}
+@media(max-width:520px){
+  #screen-login{padding:60px 12px 12px}
+  #screen-login .login-aside{padding:26px 22px 22px}
+  #screen-login .login-headline{margin-top:22px}
+  #screen-login .login-form{padding:28px 22px 24px}
+  #screen-login .mrow{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.aurora i{animation:none!important}.hl{transition-duration:.01s!important}}
+
+/* ═══ LOGIN · painéis (login ⇄ cadastro) e animações ═══ */
+.login-shell{margin:auto;transition:transform .55s var(--ease),opacity .5s var(--ease),filter .5s var(--ease)}
+.login-shell.leaving{transform:scale(.93) translateY(-12px);opacity:0;filter:blur(8px);pointer-events:none}
+.lf-stage{position:relative;overflow:hidden;box-sizing:border-box;margin:-8px;padding:8px;transition:height .6s var(--ease)}
+.lf-pane{box-sizing:border-box;opacity:1;transform:none;filter:none;visibility:visible;
+  transition:opacity .45s var(--ease),transform .6s var(--ease),filter .45s var(--ease),visibility 0s linear 0s}
+.lf-pane.is-hidden{position:absolute;left:8px;right:8px;top:8px;opacity:0;filter:blur(5px);pointer-events:none;visibility:hidden;
+  transition:opacity .35s var(--ease),transform .6s var(--ease),filter .35s var(--ease),visibility 0s linear .6s}
+.lf-pane[data-side="left"].is-hidden{transform:translateX(-44px)}
+.lf-pane[data-side="right"].is-hidden{transform:translateX(44px)}
+.lf-pane.shake{animation:lfShake .5s var(--ease)}
+@keyframes lfShake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+/* reveal em cascata ao entrar no painel */
+.lf-pane:not(.is-hidden) .stag{animation:fadeUp .6s var(--ease) both}
+.lf-pane:not(.is-hidden) .stag:nth-child(2){animation-delay:.06s}
+.lf-pane:not(.is-hidden) .stag:nth-child(3){animation-delay:.12s}
+.lf-pane:not(.is-hidden) .stag:nth-child(4){animation-delay:.18s}
+.lf-pane:not(.is-hidden) .stag:nth-child(5){animation-delay:.24s}
+/* animação sutil ao digitar a senha */
+/* animação detalhada de entrada no portal */
+@property --fx-r{syntax:'<percentage>';inherits:false;initial-value:0%}
+#enter-fx{position:fixed;inset:0;z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+  background:radial-gradient(55% 55% at 50% 46%,rgba(var(--c-accent),.18),transparent 72%),rgb(var(--c-ink900))}
+#enter-fx.on{display:flex;pointer-events:all;animation:fxIn .5s var(--ease) forwards}
+#enter-fx.on.out{animation:fxOut .35s var(--ease) forwards}
+#enter-fx.on.reveal{animation:fxReveal .95s cubic-bezier(.65,0,.25,1) forwards;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent var(--fx-r),#000 calc(var(--fx-r) + 8%));mask-image:radial-gradient(circle at 50% 50%,transparent var(--fx-r),#000 calc(var(--fx-r) + 8%))}
+@keyframes fxIn{from{opacity:0}to{opacity:1}}
+@keyframes fxOut{from{opacity:1}to{opacity:0}}
+@keyframes fxReveal{0%{--fx-r:0%;opacity:1}80%{opacity:1}100%{--fx-r:150%;opacity:0}}
+.fx-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(var(--c-line),.07) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--c-line),.07) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 46%,#000,transparent 65%);mask-image:radial-gradient(circle at 50% 46%,#000,transparent 65%);animation:fxGrid 6s linear infinite}
+@keyframes fxGrid{to{background-position:44px 44px}}
+.fx-content{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+#enter-fx.reveal .fx-content{animation:fxContentOut .55s var(--ease) forwards}
+@keyframes fxContentOut{to{opacity:0;transform:scale(1.25)}}
+.fx-core{position:relative;width:140px;height:140px;display:grid;place-items:center;color:var(--accent);animation:fxPop .7s var(--ease) both}
+@keyframes fxPop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.fx-core::before{content:"";position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(var(--c-accent),.35),transparent 65%);animation:fxGlow 2.2s ease-in-out infinite}
+@keyframes fxGlow{50%{transform:scale(1.18);opacity:.6}}
+.fx-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(var(--c-accent),.14);border-top-color:var(--accent);border-right-color:rgba(var(--c-accent),.45);animation:spin 1.3s linear infinite}
+.fx-ring.r2{inset:16px;border-top-color:var(--steel-200);border-right-color:rgba(var(--c-accent),.2);animation-duration:2.2s;animation-direction:reverse}
+.fx-ring.r3{inset:-12px;border-width:1px;border-top-color:rgba(var(--c-accent),.5);border-right-color:transparent;animation-duration:3.4s}
+.fx-hex{width:68px;height:68px;position:relative;overflow:visible}
+.fx-hex .hx-out{stroke-dasharray:60;stroke-dashoffset:60;animation:fxDraw 1s .1s var(--ease) forwards}
+.fx-hex .hx-in{opacity:0;animation:fxIn .6s .7s forwards}
+.fx-hex .hx-dot{transform-origin:14px 14px;animation:fxBeat 1.2s ease-in-out infinite}
+.fx-hex .hx-check{stroke-dasharray:14;stroke-dashoffset:14;opacity:0}
+@keyframes fxDraw{to{stroke-dashoffset:0}}
+@keyframes fxBeat{50%{transform:scale(1.5)}}
+.fx-burst{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:0;pointer-events:none}
+#enter-fx.ok .fx-ring{animation:none;border-color:rgba(var(--c-accent),.55);transition:border-color .4s}
+#enter-fx.ok .fx-ring.r3{opacity:0;transition:opacity .4s}
+#enter-fx.ok .hx-dot{animation:none;opacity:0;transition:opacity .2s}
+#enter-fx.ok .hx-check{opacity:1;animation:fxDraw .5s .1s var(--ease) forwards}
+#enter-fx.ok .fx-burst{animation:fxBurst .9s var(--ease) forwards}
+#enter-fx.ok .fx-burst.b2{animation-delay:.18s}
+@keyframes fxBurst{0%{opacity:.9;transform:scale(.7)}100%{opacity:0;transform:scale(2.6)}}
+.fx-title{margin-top:40px;font-family:'Bricolage Grotesque',serif;font-weight:600;font-size:26px;letter-spacing:-.02em;color:var(--text)}
+.fx-status{margin-top:8px;min-height:20px;font-size:13px;color:var(--text-3)}
+.fx-status.swap{animation:fxSwap .45s var(--ease)}
+@keyframes fxSwap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fx-track{margin-top:26px;width:240px;height:3px;border-radius:3px;background:rgba(var(--c-line),.16);overflow:hidden}
+.fx-track i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--steel-400),var(--accent));box-shadow:0 0 12px rgba(var(--c-accent),.6)}
+/* entrada do portal */
+@media(min-width:1025px){
+  #screen-app.enter .sidebar{animation:appSide .8s .25s var(--ease) both}
+  #screen-app.enter #main{animation:fadeUp .8s .35s var(--ease) both}
+}
+@keyframes appSide{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .lf-pane,.lf-pane.is-hidden,.lf-stage,.login-shell{transition-duration:.01s!important}
+  .fx-ring,.fx-grid,.fx-core::before{animation:none!important}
+}
 .form-alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .btn-ghost{padding:11px;background:rgba(var(--c-surface),.5);border:1px solid var(--line-2);border-radius:var(--r-sm);color:var(--text-2);font-family:'Geist',sans-serif;font-size:12.5px;font-weight:500;cursor:pointer;transition:var(--dur) var(--ease);text-align:center}
 .btn-ghost:hover{background:rgba(78,111,149,.10);border-color:var(--steel-400);color:var(--text)}
@@ -313,6 +521,8 @@ h1.page-title em{font-style:italic;font-weight:400;color:var(--accent)}
 .dash-loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--ink-850);z-index:5;transition:opacity .4s}
 .loader-ring{width:44px;height:44px;border:3px solid var(--line-2);border-top-color:var(--accent);border-radius:50%;animation:spin .9s linear infinite}
 .dash-loader p{font-size:13px;color:var(--text-3)}
+/* Oculta a barra inferior de navegação do Power BI via parâmetro oficial
+   navContentPaneEnabled=false (ver função withNavHidden, no JS). */
 .dash-frame iframe{width:100%;height:100%;border:none;display:block}
 
 /* ═══════════════════════════════════════════════════
@@ -540,14 +750,64 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 .btn-tbl.perm:hover{background:rgba(var(--c-accent),.15)}
 .btn-tbl.del{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-t2)}
 .btn-tbl.del:hover{background:rgba(192,84,106,.15)}
+/* ── Gerenciar Acesso (modal de permissões) — redesenho ── */
+.modal-perm{max-width:680px}
+.modal-perm .modal-lg-body{padding:0;gap:0;display:flex;flex-direction:column;min-height:0}
+.perm-toolbar{display:flex;gap:10px;align-items:center;padding:18px 26px 14px;flex-shrink:0;border-bottom:1px solid var(--line)}
+.perm-toolbar .search-wrap{flex:1;min-width:0}
+.perm-toolbar-btn{flex-shrink:0;white-space:nowrap;font-size:11.5px;font-weight:500;color:var(--text-3);background:rgba(var(--c-ink900),.5);border:1px solid var(--line-2);border-radius:8px;padding:7px 11px;cursor:pointer;transition:var(--dur) var(--ease)}
+.perm-toolbar-btn:hover{color:var(--text);border-color:var(--line-3)}
+.perm-summary-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 26px;flex-shrink:0;border-bottom:1px solid var(--line);font-size:12px;color:var(--text-3)}
+.perm-summary-row b{color:var(--text);font-weight:700}
+.perm-summary-actions{display:flex;gap:8px}
+.perm-summary-actions button{font-size:11px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;padding:2px 4px}
+.perm-summary-actions button:hover{text-decoration:underline}
+.perm-list{overflow-y:auto;flex:1;min-height:0;padding:14px 26px 22px;display:flex;flex-direction:column;gap:8px}
+.perm-list-empty{padding:36px 10px;text-align:center;color:var(--text-4);font-size:12.5px}
+.perm-mod-section.hide{display:none}
+.perm-mod-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;transition:var(--dur) var(--ease)}
+.perm-mod-head:hover{background:rgba(78,111,149,.06)}
+.perm-mod-expand{flex:1;min-width:0;display:flex;align-items:center;gap:9px;background:none;border:none;cursor:pointer;padding:0;text-align:left;color:inherit}
+.perm-mod-expand .chev{flex-shrink:0;transition:transform var(--dur) var(--ease);color:var(--text-4)}
+.perm-mod-section.open .perm-mod-expand .chev{transform:rotate(90deg)}
+.perm-mod-icon{flex-shrink:0;color:var(--accent);display:flex}
+.perm-mod-icon svg{width:14px;height:14px}
+.perm-mod-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.perm-mod-badge{flex-shrink:0;font-size:10.5px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text-3);background:rgba(var(--c-ink900),.6);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.perm-mod-badge.full{color:var(--success);background:rgba(94,170,122,.12);border-color:var(--success-line)}
+.toggle.sm{width:28px;height:16px;border-radius:8px}
+.toggle.sm::after{width:12px;height:12px}
+.toggle.sm.on::after{left:14px}
+.perm-reports{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s var(--ease)}
+.perm-mod-section.open .perm-reports{grid-template-rows:1fr}
+.perm-reports-inner{overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.perm-report-row{padding:8px 12px 8px 41px;font-size:12.5px}
+.perm-report-row.hide{display:none}
+.perm-report-name mark{background:rgba(224,180,102,.3);color:inherit;border-radius:2px;padding:0 1px}
 .perm-module-section{background:rgba(var(--c-ink900),.55);border:1px solid var(--glass-border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:8px}
 .perm-module-header{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:var(--transition)}
 .perm-module-header:hover{background:rgba(78,111,149,.06)}
 .perm-module-name{font-size:13px;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:8px}
-.perm-reports{padding:4px 14px 10px;display:flex;flex-direction:column;gap:6px}
 .perm-report-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(78,111,149,.06)}
 .perm-report-row:last-child{border-bottom:none}
 .perm-report-name{font-size:12px;color:var(--text-secondary)}
+
+/* ── ajustes v4 ── */
+#screen-login input::-ms-reveal,#screen-login input::-ms-clear{display:none}
+#screen-login input::-webkit-credentials-auto-fill-button{visibility:hidden;display:none!important;pointer-events:none}
+@media(min-width:1025px){
+  .hl[data-for="register"]{transform:translateY(-34px)}
+  .hl[data-for="register"].on{transform:translateY(-58px)}
+}
+/* árvore de permissões: relatórios recuados sob o módulo, toggles alinhados */
+.perm-mod-section .perm-reports-inner{position:relative}
+.perm-mod-section .perm-reports-inner::before{content:"";position:absolute;left:18px;top:0;bottom:14px;width:1px;background:var(--line-2)}
+.perm-mod-section .perm-report-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px 8px 46px;border-bottom:none;border-radius:8px;transition:background var(--dur) var(--ease)}
+.perm-mod-section .perm-report-row::before{content:"";position:absolute;left:18px;top:50%;width:16px;height:1px;background:var(--line-2)}
+.perm-mod-section .perm-report-row:hover{background:rgba(78,111,149,.06)}
+.perm-mod-section .perm-report-name{font-size:12.5px;color:var(--text-2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.perm-mod-section .perm-report-row .toggle{flex-shrink:0}
+.perm-mod-section .perm-reports-inner{padding-bottom:6px}
 .toggle{width:36px;height:20px;background:var(--bg-surface);border:1px solid var(--glass-border);border-radius:10px;position:relative;cursor:pointer;transition:var(--transition);flex-shrink:0}
 .toggle.on{background:var(--base);border-color:var(--base)}
 .toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:var(--transition)}
@@ -605,9 +865,10 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
      ═══════════════════════════════════════════════════ -->
 <div id="screen-login" class="screen">
   <button class="theme-btn theme-pill" onclick="toggleTheme()" title="Alternar tema claro / escuro" aria-label="Alternar tema"></button>
-  <div class="login-shell">
+  <div class="login-shell" data-mode="login">
 
     <aside class="login-aside">
+      <div class="aurora"><i class="a1"></i><i class="a2"></i></div>
       <div class="brand-mark">
         <div class="brand-glyph">
           <svg viewBox="0 0 28 28" fill="none">
@@ -620,77 +881,156 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
       </div>
 
       <div class="login-headline">
-        <span class="kicker"><span class="dot"></span> Sistema Online</span>
-        <h1>Onde dados<br>viram <em>decisões</em>.</h1>
-        <p>Uma central de inteligência analítica corporativa — módulos, relatórios e dashboards Power BI unificados em um único portal seguro.</p>
+        <div class="hl-stack">
+          <div class="hl on" data-for="login">
+            <span class="kicker"><span class="dot"></span> Sistema online</span>
+            <h1>Onde dados<br>viram <em>decisões</em>.</h1>
+            <p>Uma central de inteligência analítica corporativa — módulos, relatórios e dashboards Power BI unificados em um único portal seguro.</p>
+            <div class="login-aside-meta">
+              <div class="meta-item"><span class="val">120+</span><span class="lbl">Dashboards</span></div>
+              <div class="meta-sep"></div>
+              <div class="meta-item"><span class="val">24/7</span><span class="lbl">Uptime</span></div>
+              <div class="meta-sep"></div>
+              <div class="meta-item"><span class="val">SSL</span><span class="lbl">Criptografado</span></div>
+            </div>
+          </div>
 
-        <div class="login-aside-meta">
-          <div class="meta-item"><span class="val">120+</span><span class="lbl">Dashboards</span></div>
-          <div class="meta-sep"></div>
-          <div class="meta-item"><span class="val">24/7</span><span class="lbl">Uptime</span></div>
-          <div class="meta-sep"></div>
-          <div class="meta-item"><span class="val">SSL</span><span class="lbl">Criptografado</span></div>
+          <div class="hl" data-for="register">
+            <span class="kicker"><span class="dot"></span> Novo acesso</span>
+            <h1>Seu lugar na <em>inteligência</em> da empresa.</h1>
+            <p>Envie seus dados corporativos. Um administrador revisa a solicitação e libera os módulos certos para o seu departamento.</p>
+            <ol class="steps">
+              <li><b>1</b><div><strong>Envie seus dados</strong><span>Nome, e-mail corporativo e cargo.</span></div></li>
+              <li><b>2</b><div><strong>Revisão do administrador</strong><span>Validamos o seu vínculo com a empresa.</span></div></li>
+              <li><b>3</b><div><strong>Acesso liberado</strong><span>Você é avisado por e-mail.</span></div></li>
+            </ol>
+          </div>
+
+          <div class="hl" data-for="forgot">
+            <span class="kicker"><span class="dot"></span> Recuperação segura</span>
+            <h1>Vamos <em>recuperar</em> o seu acesso.</h1>
+            <p>Enviaremos um link seguro para o e-mail cadastrado, para que você crie uma nova senha em poucos passos.</p>
+            <ul class="feats">
+              <li><svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>Link enviado direto ao seu e-mail</span></li>
+              <li><svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span>Redefinição sem expor a sua senha atual</span></li>
+              <li><svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Link válido por tempo limitado</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </aside>
 
     <section class="login-form">
-      <div class="form-header">
+<div class="lf-stage" id="lf-stage">
+
+<!-- ═════ Painel · Login ═════ -->
+<div class="lf-pane" id="pane-login">
+      <div class="form-header stag">
         <h2>Acessar portal</h2>
         <p>Entre com suas credenciais corporativas.</p>
       </div>
 
-      <div class="avatar-preview" id="avatar-preview">
-        <div class="avc" id="avc">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
+      <div class="avatar-preview stag" id="avatar-preview">
+        <div class="avc" id="avc"><svg  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="avinfo">
           <h4 id="av-name">Bem-vindo de volta</h4>
           <p id="av-desc">Digite seu e-mail para começar.</p>
         </div>
       </div>
 
-      <div id="login-err" class="err-block">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div id="login-err" class="err-block" role="alert">
+        <svg  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
         <span id="login-err-msg"></span>
       </div>
 
-      <div class="field-stack" style="margin-top:16px">
+      <form id="login-form" onsubmit="return loginSubmit(event)" novalidate>
+      <div class="field-stack stag">
         <div class="field">
-          <label>E-mail corporativo</label>
+          <label for="input-email">E-mail corporativo</label>
           <div class="field-wrap">
-            <input type="email" id="input-email" placeholder="seu@empresa.com" autocomplete="email">
-            <svg class="f-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            <svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <input type="email" id="input-email" name="username" placeholder="seu@empresa.com" autocomplete="username">
           </div>
         </div>
         <div class="field">
-          <label>Senha</label>
-          <div class="field-wrap">
-            <input type="password" id="input-pass" placeholder="••••••••" autocomplete="current-password">
-            <svg class="f-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <button class="eye-btn" type="button" onclick="togglePass()">
-              <svg id="eye-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <div class="label-row"><label for="input-pass">Senha</label><a href="#" class="link-sm" onclick="showForgot();return false">Esqueci a senha</a></div>
+          <div class="field-wrap" id="pw-wrap">
+            <svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="input-pass" name="password" placeholder="••••••••" autocomplete="current-password">
+            <button class="eye-btn" type="button" onclick="togglePass()" aria-label="Mostrar ou ocultar senha">
+              <svg id="eye-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </button>
           </div>
         </div>
       </div>
 
-      <label class="remember"><input type="checkbox" id="remember-me" checked><span>Salvar login neste dispositivo</span></label>
+      <label class="remember stag"><input type="checkbox" id="remember-me" checked><span class="cb"></span><span>Salvar login neste dispositivo</span></label>
 
-      <button class="btn-primary" id="btn-login" onclick="doLogin()">
-        <span id="login-label">Entrar no Portal</span>
+      <button class="btn-primary stag" id="btn-login" type="submit">
+        <span class="bp-label" id="login-label">Entrar no Portal</span>
+        <svg class="bp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         <span class="spinner-sm" id="login-spinner" style="display:none"></span>
       </button>
+      </form>
 
-      <div class="form-alt">
-        <button class="btn-ghost" onclick="openModal('modal-register')">Solicitar cadastro</button>
-        <button class="btn-ghost" onclick="openModal('modal-forgot')">Esqueci a senha</button>
-      </div>
+      <p class="alt-line stag">Ainda não tem acesso? <a href="#" class="link-strong" onclick="showRegister();return false">Solicitar cadastro</a></p>
 
       <div class="form-footer">
         <span class="sec"><span class="dot"></span> Conexão segura (TLS 1.3)</span>
         <span>© DataNexus</span>
       </div>
+</div><!-- /pane-login -->
+
+<!-- ═════ Painel · Solicitar cadastro ═════ -->
+<div class="lf-pane is-hidden" id="pane-register" data-side="right">
+  <button class="back-link stag" type="button" onclick="showLogin()"><svg  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Voltar ao login</button>
+  <div class="form-header stag" style="margin-bottom:24px">
+    <h2>Solicitar cadastro</h2>
+    <p>Preencha seus dados corporativos. Um administrador irá revisar e aprovar seu acesso.</p>
+  </div>
+  <div id="reg-success" class="success-block" style="display:none">
+    <svg  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+    <div><strong>Cadastro enviado com sucesso!</strong><br>Aguarde a aprovação. Você receberá um e-mail quando seu acesso for liberado.</div>
+  </div>
+  <button class="btn-primary" id="reg-back-ok" type="button" onclick="showLogin()" style="display:none"><svg  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span class="bp-label">Voltar ao login</span></button>
+  <div id="reg-err" class="err-block" role="alert"></div>
+  <div id="reg-form" class="reg-fields stag">
+    <div class="field"><label for="reg-name">Nome completo <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><input type="text" id="reg-name" placeholder="Seu nome completo" autocomplete="name"></div></div>
+    <div class="field"><label for="reg-email">E-mail corporativo <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><input type="email" id="reg-email" placeholder="seu@empresa.com" autocomplete="email"></div></div>
+    <div class="mrow">
+      <div class="field"><label for="reg-dept">Departamento <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg><input type="text" id="reg-dept" placeholder="Ex: Comercial"></div></div>
+      <div class="field"><label for="reg-role">Cargo <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg><input type="text" id="reg-role" placeholder="Ex: Analista"></div></div>
+    </div>
+    <div class="mrow">
+      <div class="field"><label for="reg-pass">Senha <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><input type="password" id="reg-pass" placeholder="Crie uma senha" autocomplete="new-password" oninput="renderPwChecklist('reg-pw-checklist',this.value)"></div></div>
+      <div class="field"><label for="reg-pass2">Confirmar senha <span class="req">*</span></label><div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><input type="password" id="reg-pass2" placeholder="Repita a senha" autocomplete="new-password"></div></div>
+    </div>
+    <div class="pw-checklist" id="reg-pw-checklist"></div>
+  </div>
+  <div id="reg-footer" class="stag">
+    <button class="btn-primary" id="btn-register" onclick="doRegister()"><span class="bp-label lb">Enviar solicitação</span><svg class="bp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><span class="ss"></span></button>
+    <p class="alt-line">Já tem acesso? <a href="#" class="link-strong" onclick="showLogin();return false">Entrar</a></p>
+  </div>
+</div><!-- /pane-register -->
+
+<!-- ═════ Painel · Recuperar senha ═════ -->
+<div class="lf-pane is-hidden" id="pane-forgot" data-side="right">
+  <button class="back-link stag" type="button" onclick="showLogin()"><svg  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Voltar ao login</button>
+  <div class="form-header stag" style="margin-bottom:24px">
+    <span class="hdr-ico"><svg  width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></span>
+    <h2>Recuperar senha</h2>
+    <p>Digite seu e-mail corporativo e enviaremos um link seguro para você criar uma nova senha.</p>
+  </div>
+  <div id="forgot-msg" class="alert" role="status"></div>
+  <div class="field stag">
+    <label for="forgot-email">E-mail corporativo</label>
+    <div class="field-wrap"><svg class="f-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><input type="email" id="forgot-email" placeholder="seu@empresa.com" autocomplete="email"></div>
+  </div>
+  <button class="btn-primary stag" id="btn-forgot" onclick="doForgot()"><span class="bp-label" id="forgot-label">Enviar link de recuperação</span><svg class="bp-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg><span class="spinner-sm" id="forgot-spinner" style="display:none"></span></button>
+  <p class="alt-line stag">Lembrou a senha? <a href="#" class="link-strong" onclick="showLogin();return false">Voltar ao login</a></p>
+</div><!-- /pane-forgot -->
+
+</div><!-- /lf-stage -->
     </section>
   </div>
 </div>
@@ -973,60 +1313,26 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     MODAL · REGISTER
-     ═══════════════════════════════════════════════════ -->
-<div class="overlay" id="modal-register">
-  <div class="modal modal-lg">
-    <div class="modal-lg-head">
-      <div>
-        <span class="tagx">⬡ Novo Acesso</span>
-        <h3>Solicitar Cadastro</h3>
-        <p>Preencha seus dados corporativos. Um administrador irá revisar e aprovar seu acesso.</p>
-      </div>
-      <button class="modal-close-btn" onclick="closeModal('modal-register')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+<!-- ═══ Transição de entrada no portal ═══ -->
+<div id="enter-fx" aria-hidden="true">
+  <div class="fx-grid"></div>
+  <div class="fx-content">
+    <div class="fx-core">
+      <span class="fx-ring r3"></span><span class="fx-ring"></span><span class="fx-ring r2"></span>
+      <span class="fx-burst"></span><span class="fx-burst b2"></span>
+      <svg class="fx-hex" viewBox="0 0 28 28" fill="none">
+        <path class="hx-out" d="M14 5L23 10V18L14 23L5 18V10L14 5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path class="hx-in" d="M14 9L19 11.8V16.2L14 19L9 16.2V11.8L14 9Z" fill="currentColor" fill-opacity=".22"/>
+        <circle class="hx-dot" cx="14" cy="14" r="2.6" fill="currentColor"/>
+        <path class="hx-check" d="M10 14.4l2.9 2.9 5.3-5.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-    <div class="modal-lg-body">
-      <div id="reg-success" class="success-block" style="display:none">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <div><strong>Cadastro enviado com sucesso!</strong><br>Aguarde a aprovação. Você receberá um e-mail quando seu acesso for liberado.</div>
-      </div>
-      <div id="reg-err" class="err-block"></div>
-      <div id="reg-form" style="display:flex;flex-direction:column;gap:16px">
-        <div class="mfield"><label>Nome Completo <span class="req">*</span></label><input type="text" id="reg-name" placeholder="Seu nome completo"></div>
-        <div class="mfield"><label>E-mail Corporativo <span class="req">*</span></label><input type="email" id="reg-email" placeholder="seu@empresa.com"></div>
-        <div class="mrow">
-          <div class="mfield"><label>Departamento <span class="req">*</span></label><input type="text" id="reg-dept" placeholder="Ex: Comercial"></div>
-          <div class="mfield"><label>Cargo <span class="req">*</span></label><input type="text" id="reg-role" placeholder="Ex: Analista"></div>
-        </div>
-        <div class="mrow">
-          <div class="mfield"><label>Senha <span class="req">*</span></label><input type="password" id="reg-pass" placeholder="Crie uma senha" oninput="renderPwChecklist('reg-pw-checklist',this.value)"></div>
-          <div class="mfield"><label>Confirmar Senha <span class="req">*</span></label><input type="password" id="reg-pass2" placeholder="Repita a senha"></div>
-        </div>
-        <div class="pw-checklist" id="reg-pw-checklist"></div>
-      </div>
-    </div>
-    <div class="modal-lg-foot" id="reg-footer">
-      <span class="foot-l">Campos com <span style="color:var(--accent)">*</span> são obrigatórios</span>
-      <div class="foot-r">
-        <button class="btn-cancel" onclick="closeModal('modal-register')">Cancelar</button>
-        <button class="btn-save" id="btn-register" onclick="doRegister()"><span class="lb">Enviar Cadastro</span><span class="ss"></span></button>
-      </div>
-    </div>
+    <div class="fx-title" id="fx-title">Autenticando</div>
+    <div class="fx-status" id="fx-status"></div>
+    <div class="fx-track"><i id="fx-bar"></i></div>
   </div>
 </div>
 
-<!-- forgot -->
-<div class="overlay" id="modal-forgot">
-  <div class="modal" style="position:relative">
-    <button class="m-close" onclick="closeModal('modal-forgot')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <h3>Recuperar Senha</h3>
-    <p>Digite seu e-mail e enviaremos um link seguro para redefinição.</p>
-    <div class="mfield" style="margin-bottom:14px"><input type="email" id="forgot-email" placeholder="seu@empresa.com"></div>
-    <div id="forgot-msg" style="font-size:12.5px;margin-bottom:14px;display:none"></div>
-    <button class="btn-primary" id="btn-forgot" onclick="doForgot()"><span id="forgot-label">Enviar link de recuperação</span><span class="spinner-sm" id="forgot-spinner" style="display:none"></span></button>
-  </div>
-</div>
 
 <!-- request access -->
 <div class="overlay" id="modal-request-access">
@@ -1139,7 +1445,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
 
 <!-- Permissions modal -->
 <div class="overlay" id="modal-permissions">
-  <div class="modal modal-lg">
+  <div class="modal modal-lg modal-perm">
     <div class="modal-lg-head">
       <div class="mh-left"><div class="tagx">🔑 Permissões</div><h3>Gerenciar Acesso</h3><p id="perm-modal-user-name">Usuário</p></div>
       <button class="modal-close-btn" onclick="closeModal('modal-permissions')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -1148,7 +1454,7 @@ tbody td{padding:12px 16px;font-size:13px;color:var(--text-secondary);vertical-a
       <div style="color:var(--text-muted);font-size:13px">Carregando...</div>
     </div>
     <div class="modal-lg-foot">
-      <span class="foot-l">Alterações salvas automaticamente</span>
+      <span class="foot-l" id="perm-foot-summary">Alterações salvas automaticamente</span>
       <div class="foot-r">
         <button class="btn-cancel" onclick="closeModal('modal-permissions')">Fechar</button>
       </div>
@@ -1266,7 +1572,7 @@ function loadAdminHome(){refreshPendingBadge();if(_view==='admin-permissions')lo
 function buildReportsGrid(id){buildReports(id)}
 function goTo(s){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
-  if(s==='login'){document.getElementById('screen-login').classList.add('active');return}
+  if(s==='login'){document.getElementById('screen-login').classList.add('active');showLogin(true);return}
   document.getElementById('screen-app').classList.add('active');
   if(s==='reports')showView('mod-reports');else if(s==='dashboard')showView('dashboard');else showView('panel','panel');
 }
@@ -1412,17 +1718,20 @@ function goToNotif(v){closeNotifPanel();navTo(v)}
 function toggleNotifPanel(e){
   e?.stopPropagation();
   const p=document.getElementById('notif-panel'),open=p.classList.toggle('open');
-  if(open&&!currentProfile?.is_admin)markAllNotifsRead();
+  if(open&&!currentProfile?.is_admin)loadUserNotifications().then(()=>setTimeout(()=>{if(document.getElementById('notif-panel').classList.contains('open'))markAllNotifsRead()},2200));
 }
-let _userNotifCache=[];
+let _userNotifCache=[],_seenNotifIds=null;
 async function loadUserNotifications(){
   const wrap=document.getElementById('notif-wrap');if(wrap)wrap.style.display='';
   const {data,error}=await sb.from('user_notifications').select('*').eq('user_id',currentProfile.id).order('created_at',{ascending:false}).limit(20);
-  if(error){_userNotifCache=[];return}
+  if(error){console.warn('Notificações:',error);return}
   _userNotifCache=data||[];
+  // avisa quando chegar resposta nova enquanto o usuário está logado
+  if(_seenNotifIds){_userNotifCache.filter(n=>!n.read&&!_seenNotifIds.has(n.id)).slice(0,2).forEach(n=>showToast(n.message,isNegNotif(n)?'warn':'success'))}
+  _seenNotifIds=new Set(_userNotifCache.map(n=>n.id));
   const dot=document.getElementById('notif-dot');if(dot)dot.style.display=_userNotifCache.some(n=>!n.read)?'block':'none';
   const list=document.getElementById('notif-list');if(!list)return;
-  list.innerHTML=_userNotifCache.length?_userNotifCache.map(n=>`<div class="notif-item${n.read?'':' unread'}"><span class="notif-ic">${ICONS.chart}</span><div><p>${esc2(n.message)}</p><small>${timeAgo(n.created_at)}</small></div></div>`).join(''):'<div class="notif-empty">Nenhuma notificação por enquanto.</div>';
+  list.innerHTML=_userNotifCache.length?_userNotifCache.map(n=>`<div class="notif-item${n.read?'':' unread'}"><span class="notif-ic" style="${isNegNotif(n)?'background:var(--danger-bg);color:var(--danger-t1)':'background:var(--success-bg);color:var(--success)'}">${isNegNotif(n)?NOTIF_ICO.no:NOTIF_ICO.ok}</span><div><p>${esc2(n.message)}</p><small>${timeAgo(n.created_at)}</small></div></div>`).join(''):'<div class="notif-empty">Nenhuma notificação por enquanto.</div>';
 }
 async function markAllNotifsRead(){
   const unread=_userNotifCache.filter(n=>!n.read);
@@ -1432,9 +1741,24 @@ async function markAllNotifsRead(){
   document.getElementById('notif-dot').style.display='none';
   await sb.from('user_notifications').update({read:true}).eq('user_id',currentProfile.id).in('id',unread.map(n=>n.id));
 }
-async function notifyUser(userId,message,reportId){
-  try{await sb.from('user_notifications').insert({user_id:userId,type:'grant',message,report_id:reportId||null})}catch(e){}
+async function notifyUser(userId,message,reportId,type){
+  const base={user_id:userId,message,report_id:reportId||null};
+  let {error}=await sb.from('user_notifications').insert({...base,type:type||'grant'});
+  // se o banco restringir os valores de "type", tenta de novo com o tipo original ("grant")
+  if(error&&type&&type!=='grant')({error}=await sb.from('user_notifications').insert({...base,type:'grant'}));
+  if(error){console.warn('Falha ao notificar usuário:',error);showToast('Ação concluída, mas não foi possível notificar o usuário: '+error.message,'warn');return false}
+  return true;
 }
+const NOTIF_ICO={
+  ok:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
+  no:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>'
+};
+const isNegNotif=n=>n.type==='reject'||/foi (recusad|rejeitad)/i.test(n.message||'');
+// atualização periódica para o usuário ver as respostas sem precisar recarregar
+let _notifTimer=null;
+function startNotifPolling(){stopNotifPolling();_notifTimer=setInterval(()=>{if(!document.hidden&&currentProfile)refreshPendingBadge()},30000)}
+function stopNotifPolling(){if(_notifTimer){clearInterval(_notifTimer);_notifTimer=null}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&currentProfile&&document.getElementById('screen-app').classList.contains('active'))refreshPendingBadge()});
 function closeNotifPanel(){document.getElementById('notif-panel')?.classList.remove('open')}
 document.addEventListener('click',e=>{const w=document.getElementById('notif-wrap');if(w&&!w.contains(e.target))closeNotifPanel()});
 
@@ -1471,28 +1795,37 @@ async function loadProfile(){
 async function doLogin(){
   const email=document.getElementById('input-email').value.trim();
   const pass=document.getElementById('input-pass').value;
-  if(!email||!pass){showLoginErr('Preencha e-mail e senha');return}
+  if(!email||!pass){showLoginErr('Preencha e-mail e senha');shakePane('pane-login');return}
   const rem=document.getElementById('remember-me').checked;
   try{localStorage.setItem('dn_remember',rem?'1':'0');rem?localStorage.setItem('dn_email',email):localStorage.removeItem('dn_email')}catch(e){}
   setBtnLoading('btn-login','login-label','login-spinner',true);hideLoginErr();
+  let started=false,ok=false;
   try{
+    // 1ª etapa: validar as credenciais (a tela de login continua visível; erros aparecem aqui)
     const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
     if(error)throw error;
     currentUser=data.user;await loadProfile();
     if(!currentProfile||(currentProfile.status==='pending'&&!currentProfile.is_admin)){
-      await sb.auth.signOut();showLoginErr('Seu cadastro está aguardando aprovação do administrador.');return;
+      await sb.auth.signOut();showLoginErr('Seu cadastro está aguardando aprovação do administrador.');shakePane('pane-login');return;
     }
     if(currentProfile.status==='rejected'){
-      await sb.auth.signOut();showLoginErr('Seu acesso foi recusado. Entre em contato com o administrador.');return;
+      await sb.auth.signOut();showLoginErr('Seu cadastro foi recusado.'+(currentProfile.reject_reason?' Motivo: '+currentProfile.reject_reason+'.':'')+' Entre em contato com o administrador.');shakePane('pane-login');return;
     }
+    // 2ª etapa: credenciais válidas → só agora inicia a transição para o portal
+    // salva a credencial no gerenciador de senhas do navegador quando "Salvar login" está marcado
+    if(rem&&window.PasswordCredential){try{await navigator.credentials.store(new PasswordCredential({id:email,password:pass,name:email}))}catch(_){}}
+    LoginFx.start();started=true;
     try{const {data:prev,error:e0}=await sb.rpc('register_login');if(e0)throw e0;isFirstLogin=!prev}
     catch(_){try{const k='dn_seen_'+currentUser.id;isFirstLogin=!localStorage.getItem(k);localStorage.setItem(k,'1')}catch(e){}}
     sb.from('login_log').insert({user_id:currentUser.id}).then(()=>{}).catch(()=>{});
-    setupUI();await loadAppData();goTo('app');
+    setupUI();await loadAppData();
+    await LoginFx.success(currentProfile.full_name.split(' ')[0]);
+    goTo('app');ok=true;LoginFx.reveal();
     showToast(`${isFirstLogin?'Bem-vindo':'Bem-vindo de volta'}, ${currentProfile.full_name.split(' ')[0]}!`,'success');
   }catch(e){
     showLoginErr(e.message==='Invalid login credentials'?'E-mail ou senha incorretos.':/not confirmed/i.test(e.message)?'E-mail ainda não confirmado. Clique no link enviado à sua caixa de entrada (veja também o spam).':e.message);
-  }finally{setBtnLoading('btn-login','login-label','login-spinner',false)}
+    if(!started)shakePane('pane-login');
+  }finally{if(started&&!ok)LoginFx.fail();setBtnLoading('btn-login','login-label','login-spinner',false)}
 }
 
 function pwRequirements(pw){
@@ -1511,7 +1844,7 @@ function renderPwChecklist(containerId,pw){
 }
 const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function isDupSignup(d){return !!d?.user&&Array.isArray(d.user.identities)&&d.user.identities.length===0}
-function dupHtml(el){el.innerHTML='Este e-mail já possui cadastro. Se não lembra a senha, <a href="#" onclick="closeModal(\'modal-register\');closeModal(\'modal-user\');openModal(\'modal-forgot\');return false">redefina sua senha</a>.';el.classList.add('show')}
+function dupHtml(el){el.innerHTML='Este e-mail já possui cadastro. Se não lembra a senha, <a href="#" onclick="return openForgot()">redefina sua senha</a>.';el.classList.add('show')}
 async function emailDomainOk(email){
   const d=email.split('@')[1],q=async ty=>(await (await fetch(`https://dns.google/resolve?name=${encodeURIComponent(d)}&type=${ty}`,{signal:AbortSignal.timeout(4000)})).json());
   try{const m=await q('MX');if(m.Status===3)return false;if(m.Answer?.some(a=>a.type===15))return true;const a=await q('A');return !!a.Answer?.length}
@@ -1539,7 +1872,7 @@ async function doRegister(){
     if(isDupSignup(data))return dupHtml(errEl);
     document.getElementById('reg-form').style.display='none';
     document.getElementById('reg-footer').style.display='none';
-    document.getElementById('reg-success').style.display='flex';
+    document.getElementById('reg-success').style.display='flex';document.getElementById('reg-back-ok').style.display='flex';syncStageHeight();
   }catch(e){if(/already|registered/i.test(e.message))dupHtml(errEl);else show(/invalid/i.test(e.message)&&/email/i.test(e.message)?'E-mail inválido. Confira o endereço digitado.':e.message)}
   finally{btn.classList.remove('loading');btn.disabled=false}
 }
@@ -1547,18 +1880,23 @@ async function doRegister(){
 async function doForgot(){
   const email=document.getElementById('forgot-email').value.trim();
   const msg=document.getElementById('forgot-msg');
-  if(!email){msg.textContent='Digite seu e-mail.';msg.style.display='block';msg.style.color='#f0a7b3';return}
+  const say=(ok,t)=>{
+    const svg=ok?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>':'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>';
+    msg.className='alert';void msg.offsetWidth;msg.className='alert show '+(ok?'ok':'err');msg.innerHTML=svg+'<span></span>';msg.lastChild.textContent=t;
+  };
+  if(!email){say(false,'Digite seu e-mail.');shakePane('pane-forgot');return}
+  if(!EMAIL_RE.test(email)){say(false,'Digite um e-mail válido (ex.: nome@empresa.com).');shakePane('pane-forgot');return}
   setBtnLoading('btn-forgot','forgot-label','forgot-spinner',true);
   try{
     const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href});
     if(error)throw error;
-    msg.textContent='✓ Link enviado! Verifique sua caixa de entrada.';msg.style.color='var(--success)';msg.style.display='block';
-  }catch(e){msg.textContent='Erro ao enviar. Verifique o e-mail digitado.';msg.style.color='#f0a7b3';msg.style.display='block'}
+    say(true,'Link enviado! Verifique sua caixa de entrada (e o spam).');
+  }catch(e){say(false,'Erro ao enviar. Verifique o e-mail digitado.');shakePane('pane-forgot')}
   finally{setBtnLoading('btn-forgot','forgot-label','forgot-spinner',false)}
 }
 
 async function doLogout(){
-  if(sessionTimer)clearInterval(sessionTimer);
+  if(sessionTimer)clearInterval(sessionTimer);stopNotifPolling();_seenNotifIds=null;_userNotifCache=[];
   await sb.auth.signOut();
   currentUser=null;currentProfile=null;cachedModules=[];cachedReports={};myPermissions=new Set();myFavorites=new Set();
   document.getElementById('input-email').value='';document.getElementById('input-pass').value='';
@@ -1566,6 +1904,7 @@ async function doLogout(){
   document.getElementById('avc').innerHTML=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
   document.getElementById('av-name').textContent='Bem-vindo de volta';
   document.getElementById('av-desc').textContent='Digite seu e-mail para começar.';
+  restoreSavedLogin();
   goTo('login');
 }
 
@@ -1580,7 +1919,7 @@ function setupUI(){
   $('scope-chip').classList.toggle('user',!ad);$('scope-label').textContent=ad?'Modo Administrador':'Modo Usuário';
   $('btn-add-module').style.display=ad?'inline-flex':'none';
   document.body.classList.toggle('admin-mode',ad);
-  sessionStart=Date.now();if(sessionTimer)clearInterval(sessionTimer);
+  sessionStart=Date.now();if(sessionTimer)clearInterval(sessionTimer);startNotifPolling();
   sessionTimer=setInterval(()=>{
     const e=Math.floor((Date.now()-sessionStart)/1000),tm=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
     ['session-time','session-time-big'].forEach(id=>{const el=$(id);if(el)el.textContent=tm});
@@ -1721,14 +2060,14 @@ async function loadReportAccess(){
 }
 async function resolveReq(id,ok){
   const q=_reqs.find(o=>o.q.id===id)?.q;if(!q)return;
+  const r=allReports.find(x=>x.id===q.report_id),rn=r?.name||'relatório';
   if(ok){
-    const r=allReports.find(x=>x.id===q.report_id);
     const {error}=await sb.from('user_report_permissions').upsert({user_id:q.user_id,report_id:q.report_id,module_id:r?.module_id,granted_by:currentProfile.id,is_active:true},{onConflict:'user_id,report_id'});
     if(error)return showToast('Erro ao liberar: '+error.message,'error');
-    notifyUser(q.user_id,`Seu acesso ao relatório "${r?.name||'relatório'}" foi liberado.`,q.report_id);
   }
   const {error:e2}=await sb.from('access_requests').update({status:ok?'approved':'rejected',resolved_by:currentProfile.id,resolved_at:new Date().toISOString()}).eq('id',id);
   if(e2)return showToast('Erro: '+e2.message,'error');
+  await notifyUser(q.user_id,ok?`Seu acesso ao relatório "${rn}" foi liberado.`:`Sua solicitação de acesso ao relatório "${rn}" foi recusada.`,q.report_id,ok?'grant':'reject');
   showToast(ok?'Acesso liberado!':'Solicitação rejeitada.',ok?'success':'warn');
   await loadReportAccess();refreshPendingBadge();
 }
@@ -1736,6 +2075,11 @@ async function resolveReq(id,ok){
 // ═══════════════════════════════════════════════════
 //  DASHBOARD
 // ═══════════════════════════════════════════════════
+function withNavHidden(url){
+  if(!url||!/powerbi\.com/i.test(url))return url;
+  if(/[?&]navContentPaneEnabled=/i.test(url))return url;
+  return url+(url.includes('?')?'&':'?')+'navContentPaneEnabled=false';
+}
 function openDashboard(rid,rname,embed){
   currentReport=rname;
   dashOrigin=_view==='my-reports'?'my-reports':_view==='favorites'?'favorites':'mod-reports';
@@ -1749,7 +2093,7 @@ function openDashboard(rid,rname,embed){
       try{iframe.style.display='none';box.style.display='block';await embedPbi(embed,box);loader.style.opacity='0';loader.style.pointerEvents='none';return}
       catch(e){showToast('Login automático indisponível ('+(e.message||e)+'). Abrindo no modo padrão.','warn');box.style.display='none';iframe.style.display=''}
     }else{box.style.display='none';iframe.style.display=''}
-    if(embed){iframe.src=embed;iframe.onload=()=>{loader.style.opacity='0';loader.style.pointerEvents='none'}}
+    if(embed){iframe.src=withNavHidden(embed);iframe.onload=()=>{loader.style.opacity='0';loader.style.pointerEvents='none'}}
     else{iframe.srcdoc=buildPlaceholder(rname);setTimeout(()=>{loader.style.opacity='0';loader.style.pointerEvents='none'},600)}
   },700);
 }
@@ -1822,7 +2166,7 @@ function openUserModal(id){
   ['um-name','um-email','um-dept','um-role','um-pass','um-pass2'].forEach(x=>$(x).value='');
   if(u){$('um-name').value=u.full_name||'';$('um-email').value=u.email||'';$('um-dept').value=u.department||'';$('um-role').value=u.role||u.role_title||'';$('um-status').value=u.status==='active'?'active':'rejected'}
   $('um-admin').classList.toggle('on',!!u?.is_admin);$('um-admin').style.pointerEvents=(u&&u.id===currentProfile.id)?'none':'';$('um-admin').style.opacity=(u&&u.id===currentProfile.id)?'.45':'';$('um-email').disabled=!!u;$('um-status').disabled=!!u&&u.id===currentProfile.id;
-  $('um-pass-wrap').style.display=u?'none':'';renderPwChecklist('um-pw-checklist','');$('um-status-wrap').style.display=u?'':'none';
+  $('um-pass-wrap').style.display=u?'none':'';$('um-pw-checklist').style.display=u?'none':'';renderPwChecklist('um-pw-checklist','');$('um-status-wrap').style.display=u?'':'none';
   $('um-err').classList.remove('show');openModal('modal-user');
 }
 async function saveUser(){
@@ -1869,6 +2213,7 @@ function filterUsers(){
 async function approveUser(userId){
   const {error}=await sb.from('profiles').update({status:'active',approved_by:currentProfile.id,approved_at:new Date().toISOString()}).eq('id',userId);
   if(error){showToast('Erro ao aprovar','error');return}
+  await notifyUser(userId,'Seu cadastro foi aprovado! Você já tem acesso ao portal.',null,'approve');
   showToast('Usuário aprovado com sucesso!','success');
   await loadAdminUsers();
   loadAdminHome();
@@ -1885,6 +2230,7 @@ async function confirmReject(){
   const {error}=await sb.from('profiles').update({status:'rejected',rejected_by:currentProfile.id,rejected_at:new Date().toISOString(),reject_reason:reason||null}).eq('id',userId);
   if(error){showToast('Erro ao rejeitar','error');return}
   closeModal('modal-reject');
+  await notifyUser(userId,`Seu cadastro foi recusado.${reason?' Motivo: '+reason:''}`,null,'reject');
   showToast('Usuário rejeitado.','warn');
   await loadAdminUsers();
   loadAdminHome();
@@ -2150,45 +2496,101 @@ function filterPermUsers(){
 }
 
 async function openPermissionsModal(userId){
-  _permTargetUser=allUsers.find(u=>u.id===userId)||{id:userId};
+  _permTargetUser=allUsers.find(u=>u.id===userId);
+  if(!_permTargetUser){const {data}=await sb.from('profiles').select('*').eq('id',userId).single();_permTargetUser=data||{id:userId,full_name:'Usuário'}}
   document.getElementById('perm-modal-user-name').textContent=_permTargetUser.full_name+' · '+(_permTargetUser.email||'');
-  document.getElementById('perm-modal-body').innerHTML='<div style="color:var(--text-muted);font-size:13px">Carregando permissões...</div>';
+  document.getElementById('perm-modal-body').innerHTML=`
+    <div class="perm-toolbar">
+      <div class="search-wrap"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" id="perm-modal-search" placeholder="Buscar relatório ou módulo..." oninput="filterPermModal(this.value)"></div>
+      <button class="perm-toolbar-btn" id="perm-expand-btn" onclick="toggleExpandAllPerm()">Expandir tudo</button>
+    </div>
+    <div class="perm-summary-row">
+      <span id="perm-summary-text">Carregando...</span>
+      <div class="perm-summary-actions"><button onclick="bulkSetAllPerm(true)">Selecionar tudo</button><button onclick="bulkSetAllPerm(false)">Limpar tudo</button></div>
+    </div>
+    <div class="perm-list" id="perm-list"><div class="perm-list-empty">Carregando permissões...</div></div>`;
   openModal('modal-permissions');
-  // Load current perms
   const {data:perms}=await sb.from('user_report_permissions').select('report_id').eq('user_id',userId).eq('is_active',true);
   _permCurrentPerms=new Set((perms||[]).map(p=>p.report_id));
-  // Build UI per module
-  const body=document.getElementById('perm-modal-body');
-  if(!allModules.length){body.innerHTML='<div style="color:var(--text-muted);font-size:13px">Nenhum módulo disponível.</div>';return}
-  body.innerHTML=allModules.map(mod=>{
+  const list=document.getElementById('perm-list');
+  if(!allModules.length){list.innerHTML='<div class="perm-list-empty">Nenhum módulo disponível.</div>';return}
+  list.innerHTML=allModules.map(mod=>{
     const reps=allReports.filter(r=>r.module_id===mod.id);
     if(!reps.length)return'';
-    const allOn=reps.every(r=>_permCurrentPerms.has(r.id));
-    return `<div class="perm-module-section">
-      <div class="perm-module-header" onclick="togglePermSection('${mod.id}')">
-        <div class="perm-module-name">${ICONS[mod.icon]?ICONS[mod.icon].replace('width="20" height="20"','width="15" height="15"'):''} ${mod.name}</div>
-        <svg id="perm-chevron-${mod.id}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);transition:.2s"><polyline points="6 9 12 15 18 9"/></svg>
+    const on=reps.filter(r=>_permCurrentPerms.has(r.id)).length,allOn=on===reps.length;
+    return `<div class="perm-mod-section" id="perm-mod-${mod.id}" data-name="${esc(mod.name.toLowerCase())}">
+      <div class="perm-mod-head">
+        <button class="perm-mod-expand" onclick="togglePermSection('${mod.id}')">
+          <svg class="chev" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="perm-mod-icon">${ICONS[mod.icon]?ICONS[mod.icon].replace(/width="\d+" height="\d+"/,''):''}</span>
+          <span class="perm-mod-name">${esc(mod.name)}</span>
+        </button>
+        <span class="perm-mod-badge${allOn?' full':''}" id="perm-badge-${mod.id}">${on}/${reps.length}</span>
+        <div class="toggle sm${allOn?' on':''}" id="perm-all-${mod.id}" onclick="toggleModuleAll('${mod.id}')" title="Liberar/revogar todos deste módulo"></div>
       </div>
       <div class="perm-reports" id="perm-sec-${mod.id}">
-        <div class="toggle-all-row">
-          <span class="toggle-all-label">Liberar todos do módulo</span>
-          <div class="toggle${allOn?' on':''}" id="perm-all-${mod.id}" onclick="toggleModuleAll('${mod.id}',${allOn})"></div>
+        <div class="perm-reports-inner">
+          ${reps.map(r=>`<div class="perm-report-row" data-name="${esc(r.name.toLowerCase())}">
+            <span class="perm-report-name">${esc(r.name)}</span>
+            <div class="toggle sm${_permCurrentPerms.has(r.id)?' on':''}" id="perm-toggle-${r.id}" onclick="toggleReportPerm('${r.id}','${mod.id}')"></div>
+          </div>`).join('')}
         </div>
-        ${reps.map(r=>`<div class="perm-report-row">
-          <span class="perm-report-name">${esc(r.name)}</span>
-          <div class="toggle${_permCurrentPerms.has(r.id)?' on':''}" id="perm-toggle-${r.id}" onclick="toggleReportPerm('${r.id}','${mod.id}')"></div>
-        </div>`).join('')}
       </div>
     </div>`;
   }).join('');
+  refreshPermSummary();
 }
-
-function togglePermSection(modId){
-  const sec=document.getElementById('perm-sec-'+modId);
-  const chev=document.getElementById('perm-chevron-'+modId);
-  const isHidden=sec.style.display==='none';
-  sec.style.display=isHidden?'':'none';
-  chev.style.transform=isHidden?'':'rotate(-90deg)';
+function togglePermSection(modId){document.getElementById('perm-mod-'+modId)?.classList.toggle('open')}
+let _permAllExpanded=false;
+function toggleExpandAllPerm(){
+  _permAllExpanded=!_permAllExpanded;
+  document.querySelectorAll('.perm-mod-section').forEach(s=>s.classList.toggle('open',_permAllExpanded));
+  document.getElementById('perm-expand-btn').textContent=_permAllExpanded?'Recolher tudo':'Expandir tudo';
+}
+function filterPermModal(q){
+  q=(q||'').toLowerCase().trim();
+  document.querySelectorAll('.perm-mod-section').forEach(sec=>{
+    const modMatch=sec.dataset.name.includes(q);
+    let anyRow=modMatch;
+    sec.querySelectorAll('.perm-report-row').forEach(row=>{
+      const m=!q||row.dataset.name.includes(q);
+      row.classList.toggle('hide',!m);
+      if(m)anyRow=true;
+    });
+    sec.classList.toggle('hide',!anyRow);
+    if(q)sec.classList.toggle('open',anyRow); else if(!_permAllExpanded)sec.classList.remove('open');
+  });
+}
+async function bulkSetAllPerm(grant){
+  const allReps=allModules.flatMap(mod=>allReports.filter(r=>r.module_id===mod.id).map(r=>({r,mod})));
+  const toChange=allReps.filter(({r})=>_permCurrentPerms.has(r.id)!==grant);
+  if(!toChange.length)return;
+  if(!await askConfirm(grant?`Liberar todos os ${toChange.length} relatório(s) para ${_permTargetUser.full_name}?`:`Remover o acesso de ${_permTargetUser.full_name} a todos os relatórios liberados?`,{title:grant?'Selecionar tudo':'Limpar tudo',label:grant?'Liberar tudo':'Remover tudo',danger:!grant}))return;
+  for(const {r,mod} of toChange){
+    if(grant){_permCurrentPerms.add(r.id);await sb.from('user_report_permissions').upsert({user_id:_permTargetUser.id,report_id:r.id,module_id:mod.id,granted_by:currentProfile.id,is_active:true},{onConflict:'user_id,report_id'})}
+    else{_permCurrentPerms.delete(r.id);await sb.from('user_report_permissions').update({is_active:false}).eq('user_id',_permTargetUser.id).eq('report_id',r.id)}
+    document.getElementById('perm-toggle-'+r.id)?.classList.toggle('on',grant);
+  }
+  if(grant)notifyUser(_permTargetUser.id,`Você recebeu acesso a ${toChange.length} relatório(s).`);
+  allModules.forEach(mod=>{
+    const reps=allReports.filter(r=>r.module_id===mod.id);if(!reps.length)return;
+    document.getElementById('perm-all-'+mod.id)?.classList.toggle('on',reps.every(r=>_permCurrentPerms.has(r.id)));
+  });
+  refreshPermSummary();
+  showToast(grant?'Todos os relatórios liberados!':'Acesso removido de todos os relatórios.','success');
+}
+function refreshPermSummary(){
+  let total=0,on=0;
+  allModules.forEach(mod=>{
+    const reps=allReports.filter(r=>r.module_id===mod.id);if(!reps.length)return;
+    const modOn=reps.filter(r=>_permCurrentPerms.has(r.id)).length;
+    total+=reps.length;on+=modOn;
+    const badge=document.getElementById('perm-badge-'+mod.id);
+    if(badge){badge.textContent=`${modOn}/${reps.length}`;badge.classList.toggle('full',modOn===reps.length&&reps.length>0)}
+  });
+  const txt=`<b>${on}</b> de ${total} relatórios liberados`;
+  const s1=document.getElementById('perm-summary-text');if(s1)s1.innerHTML=txt;
+  const s2=document.getElementById('perm-foot-summary');if(s2)s2.innerHTML=total?txt:'Alterações salvas automaticamente';
 }
 
 async function toggleReportPerm(reportId,modId){
@@ -2208,10 +2610,12 @@ async function toggleReportPerm(reportId,modId){
   const reps=allReports.filter(r=>r.module_id===modId);
   const allOn=reps.every(r=>_permCurrentPerms.has(r.id));
   document.getElementById('perm-all-'+modId)?.classList.toggle('on',allOn);
+  refreshPermSummary();
 }
 
-async function toggleModuleAll(modId,currentAllOn){
+async function toggleModuleAll(modId){
   const reps=allReports.filter(r=>r.module_id===modId);
+  const currentAllOn=reps.length>0&&reps.every(r=>_permCurrentPerms.has(r.id));
   const newState=!currentAllOn;
   const allToggle=document.getElementById('perm-all-'+modId);
   allToggle?.classList.toggle('on',newState);
@@ -2226,6 +2630,7 @@ async function toggleModuleAll(modId,currentAllOn){
       await sb.from('user_report_permissions').update({is_active:false}).eq('user_id',_permTargetUser.id).eq('report_id',r.id);
     }
   }
+  refreshPermSummary();
   showToast(newState?`✓ Todos os relatórios de ${allModules.find(m=>m.id===modId)?.name} liberados!`:`Acesso removido do módulo.`,'success');
 }
 
@@ -2423,7 +2828,7 @@ async function embedPbi(url,box){
   await loadScript('https://cdn.jsdelivr.net/npm/powerbi-client@2.23.1/dist/powerbi.min.js');
   const token=await getPbiToken(),m=window['powerbi-client'].models;
   powerbi.reset(box);
-  powerbi.embed(box,{type:'report',embedUrl:url,tokenType:m.TokenType.Aad,accessToken:token,settings:{panes:{filters:{visible:false}}}});
+  powerbi.embed(box,{type:'report',embedUrl:url,tokenType:m.TokenType.Aad,accessToken:token,settings:{panes:{filters:{visible:false}},navContentPaneEnabled:false}});
 }
 
 // ═══════════════════════════════════════════════════
@@ -2452,8 +2857,140 @@ function togglePass(){
 }
 function showLoginErr(m){const e=document.getElementById('login-err');document.getElementById('login-err-msg').textContent=m;e.classList.add('show')}
 function hideLoginErr(){document.getElementById('login-err').classList.remove('show')}
-document.getElementById('input-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-document.getElementById('input-email').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('input-pass').focus()});
+
+// ═══ Painéis do login: entrar ⇄ cadastro ⇄ recuperar senha ═══
+const PANES={'pane-login':'login','pane-register':'register','pane-forgot':'forgot'};
+function setMode(id){
+  const mode=PANES[id]||'login';
+  document.querySelector('.login-shell').dataset.mode=mode;
+  document.querySelectorAll('.hl').forEach(h=>h.classList.toggle('on',h.dataset.for===mode));
+}
+function shakePane(id){const p=document.getElementById(id);p.classList.remove('shake');void p.offsetWidth;p.classList.add('shake');setTimeout(()=>p.classList.remove('shake'),520)}
+function syncStageHeight(){
+  const st=document.getElementById('lf-stage'),cur=st.querySelector('.lf-pane:not(.is-hidden)');
+  if(!cur)return;st.style.height=st.offsetHeight+'px';void st.offsetHeight;st.style.height=(cur.offsetHeight+16)+'px';
+  setTimeout(()=>{st.style.height=''},650);
+}
+var _paneBusy=false;
+function swapPane(toId,instant){
+  const st=document.getElementById('lf-stage'),to=document.getElementById(toId);
+  const cur=st.querySelector('.lf-pane:not(.is-hidden)');
+  if(!to||cur===to)return;
+  const fwd=toId!=='pane-login';           // login → outros: desliza p/ esquerda; voltar: p/ direita
+  setMode(toId);
+  const panes=[...st.querySelectorAll('.lf-pane')];
+  if(instant){
+    st.style.transition='none';panes.forEach(p=>p.style.transition='none');
+    panes.forEach(p=>{p.classList.add('is-hidden');p.dataset.side=p===to?'':(fwd?'left':'right')});
+    to.classList.remove('is-hidden');st.style.height='';
+    void st.offsetHeight;st.style.transition='';panes.forEach(p=>p.style.transition='');return;
+  }
+  if(_paneBusy)return;_paneBusy=true;
+  // posiciona o painel de destino no lado de onde ele vai entrar (sem animar)
+  to.style.transition='none';to.dataset.side=fwd?'right':'left';void to.offsetWidth;to.style.transition='';
+  const h0=st.offsetHeight,h1=to.offsetHeight+16;
+  st.style.height=h0+'px';void st.offsetHeight;
+  cur.dataset.side=fwd?'left':'right';
+  cur.classList.add('is-hidden');
+  to.classList.remove('is-hidden');to.dataset.side='';
+  st.style.height=h1+'px';
+  setTimeout(()=>{st.style.height='';_paneBusy=false;const f=to.querySelector('input:not([type=checkbox])');if(f&&window.innerWidth>700)f.focus({preventScroll:true})},620);
+}
+function resetRegister(){
+  ['reg-name','reg-email','reg-dept','reg-role','reg-pass','reg-pass2'].forEach(i=>{const e=document.getElementById(i);if(e)e.value=''});
+  renderPwChecklist('reg-pw-checklist','');
+  document.getElementById('reg-form').style.display='flex';
+  document.getElementById('reg-footer').style.display='';
+  document.getElementById('reg-success').style.display='none';
+  document.getElementById('reg-back-ok').style.display='none';
+  document.getElementById('reg-err').classList.remove('show');
+}
+renderPwChecklist('reg-pw-checklist','');
+function resetForgot(){const m=document.getElementById('forgot-msg');m.className='alert';m.innerHTML=''}
+function showRegister(){
+  if(document.getElementById('reg-success').style.display==='flex')resetRegister();
+  hideLoginErr();swapPane('pane-register');
+}
+function showForgot(){
+  resetForgot();
+  const f=document.getElementById('forgot-email'),e=document.getElementById('input-email').value.trim();
+  if(!f.value&&e)f.value=e;
+  hideLoginErr();swapPane('pane-forgot');
+}
+function openForgot(){closeModal('modal-user');if(document.getElementById('screen-login').classList.contains('active'))showForgot();return false}
+function showLogin(instant){
+  const done=document.getElementById('reg-success').style.display==='flex';
+  swapPane('pane-login',instant===true);
+  if(done)setTimeout(resetRegister,700);
+}
+['reg-name','reg-email','reg-dept','reg-role','reg-pass','reg-pass2'].forEach((id,i,a)=>{
+  document.getElementById(id).addEventListener('keydown',e=>{if(e.key!=='Enter')return;const n=a[i+1];n?document.getElementById(n).focus():doRegister()});
+});
+document.getElementById('forgot-email').addEventListener('keydown',e=>{if(e.key==='Enter')doForgot()});
+
+// ═══ Digitação da senha: cadeado balança a cada tecla ═══
+(function(){
+  const pi=document.getElementById('input-pass'),wrap=document.getElementById('pw-wrap');let t;
+  pi.addEventListener('input',()=>{
+    wrap.classList.remove('key');void wrap.offsetWidth;wrap.classList.add('key');
+    clearTimeout(t);t=setTimeout(()=>wrap.classList.remove('key'),350);
+  });
+})();
+
+// ═══ Animação detalhada de entrada no portal ═══
+const LoginFx=(()=>{
+  const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const steps=['Verificando credenciais','Preparando seu ambiente','Carregando seus módulos'];
+  let t0=0,timers=[];
+  const clear=()=>{timers.forEach(clearTimeout);timers=[]};
+  const status=t=>{const e=$('fx-status');e.classList.remove('swap');void e.offsetWidth;e.textContent=t;e.classList.add('swap')};
+  function start(){
+    clear();t0=Date.now();
+    const fx=$('enter-fx'),bar=$('fx-bar');
+    fx.className='';void fx.offsetWidth;
+    bar.style.transition='none';bar.style.width='0%';void bar.offsetWidth;
+    bar.style.transition='width 2.8s cubic-bezier(.1,.7,.2,1)';bar.style.width='84%';
+    $('fx-title').textContent='Autenticando';status(steps[0]);
+    document.querySelector('.login-shell').classList.add('leaving');
+    fx.classList.add('on');
+    timers.push(setTimeout(()=>status(steps[1]),950),setTimeout(()=>status(steps[2]),1900));
+  }
+  async function success(name){
+    await sleep(Math.max(0,2300-(Date.now()-t0)));
+    clear();
+    const bar=$('fx-bar');bar.style.transition='width .35s var(--ease)';bar.style.width='100%';
+    $('enter-fx').classList.add('ok');
+    $('fx-title').textContent='Acesso liberado';status('Bem-vindo, '+name);
+    await sleep(1250);
+  }
+  function reveal(){
+    const fx=$('enter-fx'),app=$('screen-app');
+    app.classList.add('enter');fx.classList.add('reveal');
+    setTimeout(()=>{fx.className='';app.classList.remove('enter');document.querySelector('.login-shell').classList.remove('leaving')},1100);
+  }
+  function fail(){
+    clear();
+    const fx=$('enter-fx'),shell=document.querySelector('.login-shell');
+    shell.classList.remove('leaving');
+    if(!fx.classList.contains('on'))return;
+    fx.classList.add('out');
+    setTimeout(()=>{fx.className=''},360);
+    shakePane('pane-login');
+  }
+  return{start,success,reveal,fail};
+})();
+function loginSubmit(e){e.preventDefault();doLogin();return false}
+document.getElementById('input-email').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('input-pass').focus()}});
+// "Salvar login neste dispositivo": devolve o e-mail salvo ao campo (no carregamento e após sair)
+function restoreSavedLogin(){
+  try{
+    const rem=localStorage.getItem('dn_remember')!=='0';
+    document.getElementById('remember-me').checked=rem;
+    const em=rem&&localStorage.getItem('dn_email');
+    if(em){const i=document.getElementById('input-email');i.value=em;i.dispatchEvent(new Event('input'))}
+  }catch(e){}
+}
+restoreSavedLogin();
 
 // ═══════════════════════════════════════════════════
 //  HELPERS
